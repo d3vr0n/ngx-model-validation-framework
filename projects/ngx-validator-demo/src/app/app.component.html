@@ -1,0 +1,14 @@
+<div style="padding: 10px; ">
+    <!-- <button mat-raised-button color="accent" [routerLink]="['/simple']">Simple</button> display: flex; justify-content: space-around;
+<button mat-raised-button color="accent" [routerLink]="['/group']">Group</button>
+<button mat-raised-button color="accent" [routerLink]="['/big100']">Big 100 input</button>
+<button mat-raised-button color="accent" [routerLink]="['/tabbed']">Tabbed</button> -->
+    <nav mat-tab-nav-bar mat-stretch-tabs [color]="'accent'">
+        <a mat-tab-link [routerLink]="['/simple']">Simple</a>
+        <a mat-tab-link [routerLink]="['/group']">Group</a>
+        <a mat-tab-link [routerLink]="['/big100']">Big 100 input</a>
+        <a mat-tab-link [routerLink]="['/tabbed']">Tabbed</a>
+    </nav>
+</div>
+<simple-notifications></simple-notifications>
+<router-outlet></router-outlet>

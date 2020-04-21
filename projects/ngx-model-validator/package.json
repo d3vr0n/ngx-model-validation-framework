@@ -1,0 +1,29 @@
+{
+  "name": "ngx-model-validator",
+  "version": "1.0.0-beta.1",
+  "description": "A policy based angular model fluid validation framework",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/d3vr0n/ngx-model-validation-framework.git"
+  },
+  "keywords": [
+    "Angular",
+    "Angular 2+",
+    "Angular 8",
+    "Angular validation",
+    "Angular model validation",
+    "fluid validation",
+    "policy validation",    
+    "ui validation"
+  ],
+  "author": "d3vr0n",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/d3vr0n/ngx-model-validation-framework/issues"
+  },
+  "homepage": "https://github.com/d3vr0n/ngx-model-validation-framework",
+  "peerDependencies": {
+    "@angular/common": "^8.2.14",
+    "@angular/core": "^8.2.14"
+  }
+}

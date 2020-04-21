@@ -1,0 +1,106 @@
+<mat-toolbar color="primary" style="display: flex;">
+    <span>Simple Validation</span>
+
+    <!-- This fills the remaining space of the current row -->
+    <span class="example-fill-remaining-space"></span>
+
+    <button mat-raised-button color="" (click)="validate()" [disabled]="disableValidateButton"> 
+        <span class="spinner-grow spinner-grow-sm" *ngIf="shouldShowButtonProgress" role="status" aria-hidden="true"></span>
+        Validate
+    </button>
+</mat-toolbar>
+
+<div class="display:flex;">
+    <div class="flex-item">
+        <mat-card>
+            <ngx-component-validator [model]="person" [policy]="PERSON_POLICY_NAME"
+                [policyFnRef]="PERSON_VALIDATION_FN"></ngx-component-validator>
+
+            <mat-grid-list cols="3" rowHeight="65px">
+                <mat-grid-tile>
+                    <mat-form-field>
+                        <input matInput placeholder="First Name" ngxMatValidate  [model]="person"
+                            validateProperty="firstName" [policy]="PERSON_POLICY_NAME"
+                            [(ngModel)]="person.firstName" />
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <mat-form-field>
+                        <input matInput placeholder="Last Name" ngxMatValidate  [model]="person"
+                            validateProperty="lastName" [policy]="PERSON_POLICY_NAME"
+                            [(ngModel)]="person.lastName" />
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <label>Gender: &nbsp;</label>
+                    <mat-radio-group class="radio-group" [(ngModel)]="person.gender" ngxMatValidate 
+                        [model]="person" validateProperty="gender" [policy]="PERSON_POLICY_NAME">
+                        <mat-radio-button *ngFor="let g of genderOptions" [value]="g.value">
+                            {{g.label}}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <mat-form-field>
+                        <input matInput placeholder="Age" ngxMatValidate  [model]="person"
+                            validateProperty="age" [policy]="PERSON_POLICY_NAME" [(ngModel)]="person.age" />
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <mat-form-field>
+                        <input matInput placeholder="Email ID" ngxMatValidate  [model]="person"
+                            validateProperty="email" [policy]="PERSON_POLICY_NAME" [(ngModel)]="person.email" />
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <mat-form-field>
+                        <input matInput placeholder="Address Line 1" ngxMatValidate 
+                            [model]="person" validateProperty="address.line1" [policy]="PERSON_POLICY_NAME"
+                            [(ngModel)]="person.address.line1" />
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <mat-form-field>
+                        <input matInput placeholder="Address Line 2" ngxMatValidate 
+                            [model]="person" validateProperty="address.line2" [policy]="PERSON_POLICY_NAME"
+                            [(ngModel)]="person.address.line2" />
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <mat-form-field>
+                        <input matInput placeholder="City" ngxMatValidate  [model]="person"
+                            validateProperty="address.city" [policy]="PERSON_POLICY_NAME"
+                            [(ngModel)]="person.address.city" />
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <mat-form-field>
+                        <mat-label>State</mat-label>
+                        <mat-select ngxMatValidate  [model]="person"
+                            validateProperty="address.state" [policy]="PERSON_POLICY_NAME"
+                            [(ngModel)]="person.address.state">
+                            <mat-option *ngFor="let s of states" [value]="s.value">
+                                {{s.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <mat-form-field>
+                        <input matInput placeholder="Zip Code" ngxMatValidate  [model]="person"
+                            validateProperty="address.zip" [policy]="PERSON_POLICY_NAME"
+                            [(ngModel)]="person.address.zip" />
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+
+                </mat-grid-tile>
+
+            </mat-grid-list>
+
+        </mat-card>
+    </div>
+
+</div>

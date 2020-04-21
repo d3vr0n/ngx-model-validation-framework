@@ -1,0 +1,118 @@
+<mat-toolbar color="primary" style="display: flex;">
+    <span>Group Form Validation</span>
+
+    <!-- This fills the remaining space of the current row -->
+    <span class="example-fill-remaining-space"></span>
+
+    <button mat-raised-button color="" (click)="validate()"> Validate</button>
+</mat-toolbar>
+
+<ngx-component-validator [model]="tabdoc" [policy]="ORDER_POLICY_NAME" [policyFnRef]="ORDER_VALIDATION_FN">
+</ngx-component-validator>
+
+<mat-card>
+    <mat-card-title>Personal Info</mat-card-title>
+    <mat-grid-list cols="3" rowHeight="65px">
+        <mat-grid-tile>
+            <mat-form-field>
+                <input matInput placeholder="First Name" ngxMatValidate ngxMatRequired [model]="tabdoc"
+                    validateProperty="person.firstName" [policy]="ORDER_POLICY_NAME"
+                    [(ngModel)]="tabdoc.person.firstName" />
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field>
+                <input matInput placeholder="Last Name" ngxMatValidate ngxMatRequired [model]="tabdoc"
+                    validateProperty="person.lastName" [policy]="ORDER_POLICY_NAME"
+                    [(ngModel)]="tabdoc.person.lastName" />
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field>
+                <input matInput placeholder="Email ID" ngxMatValidate ngxMatRequired [model]="tabdoc"
+                    validateProperty="person.email" [policy]="ORDER_POLICY_NAME"
+                    [(ngModel)]="tabdoc.person.email" />
+            </mat-form-field>
+        </mat-grid-tile>
+    </mat-grid-list>
+</mat-card>
+
+<mat-card>
+    <mat-card-title>Address Info</mat-card-title>
+    <mat-grid-list cols="3" rowHeight="65px">
+        <mat-grid-tile>
+            <mat-form-field>
+                <input matInput placeholder="Address Line 1" ngxMatValidate ngxMatRequired [model]="tabdoc"
+                    validateProperty="address.line1" [policy]="ORDER_POLICY_NAME"
+                    [(ngModel)]="tabdoc.address.line1" />
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field>
+                <input matInput placeholder="Address Line 2" ngxMatValidate ngxMatRequired [model]="tabdoc"
+                    validateProperty="address.line2" [policy]="ORDER_POLICY_NAME"
+                    [(ngModel)]="tabdoc.address.line2" />
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field>
+                <input matInput placeholder="City" ngxMatValidate ngxMatRequired [model]="tabdoc"
+                    validateProperty="address.city" [policy]="ORDER_POLICY_NAME"
+                    [(ngModel)]="tabdoc.address.city" />
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field>
+                <mat-label>State</mat-label>
+                <mat-select ngxMatValidate ngxMatRequired [model]="tabdoc" validateProperty="address.state"
+                    [policy]="ORDER_POLICY_NAME" [(ngModel)]="tabdoc.address.state">
+                    <mat-option *ngFor="let s of states" [value]="s.value">
+                        {{s.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field>
+                <input matInput placeholder="Zip Code" ngxMatValidate ngxMatRequired [model]="tabdoc"
+                    validateProperty="address.zip" [policy]="ORDER_POLICY_NAME" [(ngModel)]="tabdoc.address.zip" />
+            </mat-form-field>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+</mat-card>
+
+<mat-card>
+    <mat-card-title>Payment Info</mat-card-title>
+    <mat-grid-list cols="2" rowHeight="65px">
+        <mat-grid-tile>
+            <mat-form-field>
+                <input matInput placeholder="Card Number" ngxMatValidate ngxMatRequired [model]="tabdoc"
+                    validateProperty="payment.cardno" [policy]="ORDER_POLICY_NAME"
+                    [(ngModel)]="tabdoc.payment.cardno" />
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field>
+                <input matInput placeholder="Name on Card" ngxMatValidate ngxMatRequired [model]="tabdoc"
+                    validateProperty="payment.name" [policy]="ORDER_POLICY_NAME"
+                    [(ngModel)]="tabdoc.payment.name" />
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field>
+                <input matInput placeholder="Expiry" ngxMatValidate ngxMatRequired [model]="tabdoc"
+                    validateProperty="payment.expiry" [policy]="ORDER_POLICY_NAME"
+                    [(ngModel)]="tabdoc.payment.expiry" />
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field>
+                <input matInput placeholder="CVV" ngxMatValidate ngxMatRequired [model]="tabdoc"
+                    validateProperty="payment.cvv" [policy]="ORDER_POLICY_NAME" [(ngModel)]="tabdoc.payment.cvv" />
+            </mat-form-field>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+
+</mat-card>
