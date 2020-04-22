@@ -1,6 +1,6 @@
 {
   "name": "ngx-model-validator",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "A policy based angular model fluid validation framework",
   "repository": {
     "type": "git",
