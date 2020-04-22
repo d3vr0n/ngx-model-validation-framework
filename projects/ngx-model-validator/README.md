@@ -5,6 +5,9 @@ A policy based fluid model validation framework for Angular projects.
 [![npm version](https://badge.fury.io/js/ngx-model-validator.svg)](https://www.npmjs.com/ngx-model-validator)
 [![CircleCI](https://circleci.com/gh/d3vr0n/ngx-model-validation-framework/tree/master.svg?style=svg)](https://circleci.com/gh/d3vr0n/ngx-model-validation-framework/tree/master)
 
+## Demo
+https://ngx-model-validator.web.app/simple
+
 # Installation
 
 ```bash
@@ -55,13 +58,15 @@ export class PersonValidationPolicy implements NgxValidationPolicy {
             }
         }
 
-        const cityAndStateAsyncValidatorFn = async(errorMsg:string, val :any, policy:any)=>{
+        const cityAndStateAsyncValidatorFn = async(errorMsg:string, val :any, policy:any, model:any)=>{
 
-            const url = `some url`;
+            // api key get resets everyday - get new one while testing
+            const api_key = "api_key";
+            const url = `some_url/${api_key}`;
             const result = await (await fetch(url)).json();
 
             if(result){
-                if(result.state === val) {
+                if(result.state === model.address.state) {
                     return true;
                 }
             } 
