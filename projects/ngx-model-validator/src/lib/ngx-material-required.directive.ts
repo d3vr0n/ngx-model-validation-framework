@@ -48,7 +48,7 @@ export class NgxMatRequiredDirective implements OnInit, AfterViewInit, OnChanges
     // https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
     this.ngZone.runOutsideAngular(() => {
 
-
+      // todo : try using https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API
       window.addEventListener("message", (event: MessageEvent) => {
 
         if (event.data.type === 'required' && event.data.propertyName === this.validateProperty) {

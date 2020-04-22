@@ -1,5 +1,5 @@
 import {
-  AfterViewInit, Directive, OnInit, Renderer2, ElementRef, OnDestroy, Input, OnChanges, SimpleChanges
+  AfterViewInit, Directive, OnInit, Renderer2, ElementRef, OnDestroy, Input, OnChanges, SimpleChanges, NgZone
 } from '@angular/core';
 
 import { NgxValidationRunnerService } from './service/ngx-validation-runner.service';
@@ -9,7 +9,7 @@ import { NgModel } from '@angular/forms';
 // TODO : abstract the validation logic in a base class and use it in a child class for
 // any type of UI, e.g. material, bootstrap etc.
 // usage    
-//   ngxMatValidate [validateProperty]="person.age" [model]="person" [policy]="PERSON_POLICY_NAME" [(ngModel)]="person.age"
+//   ngxBootStrapValidate [validateProperty]="person.age" [model]="person" [policy]="PERSON_POLICY_NAME" [(ngModel)]="person.age"
 
 // try follow https://github.com/rsaenen/ngx-custom-validators/blob/master/src/app/less-than/directive.ts
 
@@ -27,15 +27,15 @@ export class NgxBootStrapValidatorDirective implements OnInit, AfterViewInit, On
 
   @Input() validateOnEvent: string;
 
-  parentNodeName = '';
-  depthOfParentNode: number;
+  immediateParentNode: any;
+  formGroupContainerDiv: any;
   isInput = false;
   isCheckbox = false;
   isRadioButton = false;
 
   constructor(
     private validationService: NgxValidationRunnerService,
-    private elementRef: ElementRef,
+    private elementRef: ElementRef, private ngZone: NgZone,
     private renderer2: Renderer2, private ngModel: NgModel) {
 
   }
@@ -49,7 +49,7 @@ export class NgxBootStrapValidatorDirective implements OnInit, AfterViewInit, On
     // https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
     window.addEventListener("message", (event: MessageEvent) => {
 
-      if (event.data.propertyName === this.validateProperty) {
+      if (event.data.type === 'validation' && event.data.propertyName === this.validateProperty) {
         // debugger;
         this.addErrorToBootstrapControl(event.data.operation === 'added' ? event.data.errorMessage : null);
       }
@@ -69,10 +69,14 @@ export class NgxBootStrapValidatorDirective implements OnInit, AfterViewInit, On
       // todo call central validation runner here
       // Delay the execution of validate by 200ms as the ngModel value needs to be updated.
       // This is workaround for mat-checkbox and mat-radio-group elements
-      // const delay = (this.isRadioButton || this.isCheckbox) ? 200 : 0;
+      const delay = (this.isRadioButton || this.isCheckbox) ? 200 : 0;
       // run validation after the delay
 
-      this.validationService.validate(this.policy, this.model, this.validateProperty); // no need to subscribe here
+      this.ngZone.runOutsideAngular(() => {
+        setTimeout(() => {
+          this.validationService.validate(this.policy, this.model, this.validateProperty); // no need to subscribe here
+        }, delay);
+      });
     });
 
   }
@@ -87,28 +91,42 @@ export class NgxBootStrapValidatorDirective implements OnInit, AfterViewInit, On
 
   testBootstrapElementType() {
     const node = this.elementRef.nativeElement;
-
+    // debugger;
+    if(node.type === 'text') {
+      this.isInput = true;
+      this.immediateParentNode = node.parentNode;
+      this.formGroupContainerDiv = this.immediateParentNode.parentNode;
+    } else if(node.type === 'radio') {
+      this.isRadioButton = true;
+      this.immediateParentNode = node.parentNode.parentNode;
+      this.formGroupContainerDiv = this.immediateParentNode.parentNode;
+    }
     
   }
 
   addErrorToBootstrapControl(errorMsg: string) {
     let node = this.elementRef.nativeElement;
-    const maxDept = 5;  // Using this as mat elements depth of Parent doesn't exceed 5
-    let loopCount = 0;
 
-    while (loopCount < maxDept) {
-      if (node.nodeName.toUpperCase() === this.parentNodeName) {
-        break;
-      } else {
-        node = node.parentNode;
+    if(errorMsg) {
+      if(this.isRadioButton && this.formGroupContainerDiv.className.indexOf('border') > -1) {
+        return;
       }
-      loopCount++;
+      this.renderer2.addClass(this.formGroupContainerDiv, 'border');
+      this.renderer2.addClass(this.formGroupContainerDiv, 'border-danger');
+
+      const errorHolder = document.createElement('span');
+      const textNode = document.createTextNode(errorMsg);
+      errorHolder.appendChild(textNode);
+      this.immediateParentNode.appendChild(errorHolder);
+      
+    } else {
+      this.renderer2.removeClass(this.formGroupContainerDiv, 'border');
+      this.renderer2.removeClass(this.formGroupContainerDiv, 'border-danger');
+      const errorTextNode = this.immediateParentNode.lastChild;
+      if(errorTextNode.tagName === 'SPAN') {
+        this.immediateParentNode.removeChild(errorTextNode);
+      }
     }
-
   };
 
-  
-  addBootstrapErrorsToHtml(errorElement: any, node: any, errorMsg: string, cssErrorClass: string) {
-     throw new Error('Not implemented')
-  };
 }

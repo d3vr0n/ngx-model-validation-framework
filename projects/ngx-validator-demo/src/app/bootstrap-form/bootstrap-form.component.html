@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="row justify-content-between alert alert-dark">
+                <div class="col-sm">
+                    <h2>Bootstrap Form Validation</h2>
+                </div>
+                <div class="col-2">
+                    <button class="btn btn-lg btn-primary" (click)="validate()">Validate</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <!--blank-->&nbsp;
+                </div>
+            </div>
+
+
+            <ngx-component-validator [model]="person" [policy]="PERSON_POLICY_NAME"
+                [policyFnRef]="PERSON_VALIDATION_FN">
+            </ngx-component-validator>
+
+            <div class="row">
+                <div class="col-sm">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="firstName">
+                            First Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="firstName" ngxBootStrapValidate [model]="person"
+                                validateProperty="firstName" [policy]="PERSON_POLICY_NAME"
+                                [(ngModel)]="person.firstName" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="lastName">
+                            Last Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="lastName" ngxBootStrapValidate [model]="person"
+                                validateProperty="lastName" [policy]="PERSON_POLICY_NAME" [(ngModel)]="person.lastName" />
+                        </div>
+                    </div>
+                </div>
+            </div><!--row 1 ends-->
+            <div class="row">
+                <div class="col-sm">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="gender">
+                            Gender</label>
+                        <div class="col-sm-10">
+                        
+                            <label class="btn" *ngFor="let g of genderOptions"><input type="radio" name="gender" ngxBootStrapValidate
+                                    [model]="person" validateProperty="gender" [policy]="PERSON_POLICY_NAME" [(ngModel)]="person.gender"
+                                    [value]="g.value">{{g.label}}</label>
+                        
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="emailId">
+                            Email ID</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="emailId" ngxBootStrapValidate [model]="person"
+                                validateProperty="email" [policy]="PERSON_POLICY_NAME" [(ngModel)]="person.email" />
+                        </div>
+                    </div>
+                </div>
+            </div><!--row 2 ends-->
+
+        </div>
+    </div>
+</div>

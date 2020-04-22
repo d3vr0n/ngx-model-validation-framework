@@ -11,6 +11,7 @@ import { SimpleComponent } from './simple/simple.component';
 import { TabbedComponent } from './tabbed/tabbed.component';
 import { Big100Component } from './big100/big100.component';
 import { GroupComponent } from './group/group.component';
+import { BootstrapFormComponent } from './bootstrap-form/bootstrap-form.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { GroupComponent } from './group/group.component';
     SimpleComponent,
     TabbedComponent,
     Big100Component,
-    GroupComponent
+    GroupComponent,
+    BootstrapFormComponent
   ],
   imports: [
     BrowserAnimationsModule,
