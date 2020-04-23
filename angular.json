@@ -53,7 +53,7 @@
             "main": "projects/ngx-validator-demo/src/main.ts",
             "polyfills": "projects/ngx-validator-demo/src/polyfills.ts",
             "tsConfig": "projects/ngx-validator-demo/tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "projects/ngx-validator-demo/src/favicon.ico",
               "projects/ngx-validator-demo/src/assets"

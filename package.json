@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "build-demo": "ng build ngx-validator-demo",
     "firebase-use": "firebase use ngx-model-validator",
-    "firebase-deploy": "firebase deploy --only hosting:ngx-model-valdiator"
+    "firebase-deploy": "firebase deploy --only hosting"
   },
   "private": false,
   "dependencies": {
