@@ -3,6 +3,17 @@
        Every toolbar row uses a flexbox row layout. */
     flex: 1 1 auto;
   }
-  mat-card {
+  ::ng-deep mat-card {
       margin: 10px;
+  }
+
+  .example-viewport {
+    height: calc(100% - 140px);
+    width: auto;
+    border: 1px solid black;
+  }
+  
+  .example-item {
+    margin: 10px;
+    height: auto;
   }
