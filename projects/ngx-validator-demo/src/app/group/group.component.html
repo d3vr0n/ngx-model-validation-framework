@@ -10,8 +10,17 @@
 <ngx-component-validator [model]="tabdoc" [policy]="ORDER_POLICY_NAME" [policyFnRef]="ORDER_VALIDATION_FN">
 </ngx-component-validator>
 
-<mat-card>
-    <mat-card-title>Personal Info</mat-card-title>
+<mat-card ngxMatGroupValidityCheck (groupValidationStatusChange)="handleGroupValidationStatusChange($event)">
+    <mat-card-title>
+        Personal Info
+        <mat-icon *ngIf="flags.showPersonalSectionErrorStatus" style="color:red">error_outline</mat-icon>
+        <mat-icon *ngIf="!flags.showPersonalSectionErrorStatus" style="color:green">check_circle_outline</mat-icon>
+        <!-- <div style="display: flex;">
+            <span></span>
+            <span class="example-fill-remaining-space"></span>
+            
+        </div> -->
+    </mat-card-title>
     <mat-grid-list cols="3" rowHeight="65px">
         <mat-grid-tile>
             <mat-form-field>
@@ -30,8 +39,7 @@
         <mat-grid-tile>
             <mat-form-field>
                 <input matInput placeholder="Email ID" ngxMatValidate ngxMatRequired [model]="tabdoc"
-                    validateProperty="person.email" [policy]="ORDER_POLICY_NAME"
-                    [(ngModel)]="tabdoc.person.email" />
+                    validateProperty="person.email" [policy]="ORDER_POLICY_NAME" [(ngModel)]="tabdoc.person.email" />
             </mat-form-field>
         </mat-grid-tile>
     </mat-grid-list>
@@ -43,22 +51,19 @@
         <mat-grid-tile>
             <mat-form-field>
                 <input matInput placeholder="Address Line 1" ngxMatValidate ngxMatRequired [model]="tabdoc"
-                    validateProperty="address.line1" [policy]="ORDER_POLICY_NAME"
-                    [(ngModel)]="tabdoc.address.line1" />
+                    validateProperty="address.line1" [policy]="ORDER_POLICY_NAME" [(ngModel)]="tabdoc.address.line1" />
             </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile>
             <mat-form-field>
                 <input matInput placeholder="Address Line 2" ngxMatValidate ngxMatRequired [model]="tabdoc"
-                    validateProperty="address.line2" [policy]="ORDER_POLICY_NAME"
-                    [(ngModel)]="tabdoc.address.line2" />
+                    validateProperty="address.line2" [policy]="ORDER_POLICY_NAME" [(ngModel)]="tabdoc.address.line2" />
             </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile>
             <mat-form-field>
                 <input matInput placeholder="City" ngxMatValidate ngxMatRequired [model]="tabdoc"
-                    validateProperty="address.city" [policy]="ORDER_POLICY_NAME"
-                    [(ngModel)]="tabdoc.address.city" />
+                    validateProperty="address.city" [policy]="ORDER_POLICY_NAME" [(ngModel)]="tabdoc.address.city" />
             </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile>
@@ -95,8 +100,7 @@
         <mat-grid-tile>
             <mat-form-field>
                 <input matInput placeholder="Name on Card" ngxMatValidate ngxMatRequired [model]="tabdoc"
-                    validateProperty="payment.name" [policy]="ORDER_POLICY_NAME"
-                    [(ngModel)]="tabdoc.payment.name" />
+                    validateProperty="payment.name" [policy]="ORDER_POLICY_NAME" [(ngModel)]="tabdoc.payment.name" />
             </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile>

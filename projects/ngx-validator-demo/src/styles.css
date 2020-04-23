@@ -2,6 +2,11 @@
 
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import "~bootstrap/dist/css/bootstrap.css";
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+.material-icons {
+  font-size: 32px;
+}
 
 body {
   margin: 0px !important;

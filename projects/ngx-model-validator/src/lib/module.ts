@@ -5,10 +5,11 @@ import { NgxComponentValidatorDirective } from "./ngx-component-validator.direct
 import { NgxValidationRunnerService } from './service/ngx-validation-runner.service';
 import { NgxMatRequiredDirective } from './ngx-material-required.directive';
 import { NgxBootStrapValidatorDirective } from './ngx-bootstrap-validator.directive';
+import { NgxMatGroupValidityCheckDirective } from './ngx-group-validity-check.directive';
 
 @NgModule({
-  exports: [NgxMatValidatorDirective, NgxComponentValidatorDirective, NgxMatRequiredDirective, NgxBootStrapValidatorDirective],
-  declarations: [NgxMatValidatorDirective, NgxComponentValidatorDirective, NgxMatRequiredDirective, NgxBootStrapValidatorDirective],
+  exports: [NgxMatValidatorDirective, NgxComponentValidatorDirective, NgxMatRequiredDirective, NgxBootStrapValidatorDirective, NgxMatGroupValidityCheckDirective],
+  declarations: [NgxMatValidatorDirective, NgxComponentValidatorDirective, NgxMatRequiredDirective, NgxBootStrapValidatorDirective, NgxMatGroupValidityCheckDirective],
   providers: [NgxValidationRunnerService]
 })
 

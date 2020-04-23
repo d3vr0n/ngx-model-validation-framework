@@ -12,6 +12,9 @@ export class GroupComponent implements OnInit {
   public ORDER_POLICY_NAME = 'group-order-policy';
   public ORDER_VALIDATION_FN = OrderValidationPolicy;
   public states = [{ 'viewValue': 'California', 'value': 'CA' }, { 'viewValue': 'Michigan', 'value': 'MI' }, { 'viewValue': 'Minnesota', 'value': 'MN' }];
+  public flags = {
+    showPersonalSectionErrorStatus : false
+  }
 
   public tabdoc = {
     person : {
@@ -49,4 +52,13 @@ export class GroupComponent implements OnInit {
   ngOnInit() {
   }
 
+  handleGroupValidationStatusChange(payload) {
+    if(payload.section === 'section') {
+      if(payload.isValid === 'valid') {
+        this.flags.showPersonalSectionErrorStatus = false;
+      } else {
+        this.flags.showPersonalSectionErrorStatus = true;
+      }
+    }
+  }
 }

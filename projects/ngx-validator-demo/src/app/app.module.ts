@@ -1,6 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import {MatCardModule, MatGridListModule,MatFormFieldModule,MatRadioModule,MatInputModule, MatButtonModule, MatSelectModule, MatToolbarModule, MatTabsModule} from '@angular/material';
+import {MatIconModule} from '@angular/material/icon';
 import {FormsModule} from '@angular/forms';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
@@ -25,7 +26,7 @@ import { BootstrapFormComponent } from './bootstrap-form/bootstrap-form.componen
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,FormsModule,
-    NgxValidationModule,
+    NgxValidationModule, MatIconModule,
     SimpleNotificationsModule.forRoot(),
     MatCardModule,MatGridListModule,MatFormFieldModule,MatRadioModule,MatInputModule, MatButtonModule, MatSelectModule, MatToolbarModule, MatTabsModule
   ],
