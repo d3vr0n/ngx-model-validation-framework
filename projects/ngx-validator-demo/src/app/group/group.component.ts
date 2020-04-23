@@ -13,7 +13,9 @@ export class GroupComponent implements OnInit {
   public ORDER_VALIDATION_FN = OrderValidationPolicy;
   public states = [{ 'viewValue': 'California', 'value': 'CA' }, { 'viewValue': 'Michigan', 'value': 'MI' }, { 'viewValue': 'Minnesota', 'value': 'MN' }];
   public flags = {
-    showPersonalSectionErrorStatus : false
+    showPersonalSectionErrorStatus : false,
+    showAddressSectionErrorStatus : false,
+    showPaymentSectionErrorStatus : false,
   }
 
   public tabdoc = {
@@ -53,11 +55,23 @@ export class GroupComponent implements OnInit {
   }
 
   handleGroupValidationStatusChange(payload) {
-    if(payload.section === 'section') {
+    if(payload.section === 'personal-section') {
       if(payload.isValid === 'valid') {
         this.flags.showPersonalSectionErrorStatus = false;
       } else {
         this.flags.showPersonalSectionErrorStatus = true;
+      }
+    } else if(payload.section === 'address-section') {
+      if(payload.isValid === 'valid') {
+        this.flags.showAddressSectionErrorStatus = false;
+      } else {
+        this.flags.showAddressSectionErrorStatus = true;
+      }
+    } else if(payload.section === 'payment-section') {
+      if(payload.isValid === 'valid') {
+        this.flags.showPaymentSectionErrorStatus = false;
+      } else {
+        this.flags.showPaymentSectionErrorStatus = true;
       }
     }
   }

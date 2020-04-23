@@ -24,7 +24,7 @@ export class NgxMatGroupValidityCheckDirective implements OnInit, AfterViewInit,
   private _ngPristineClassCount = 0; //goes +ve
   private _ngValidClassCount = 0; //goes -ve
 
-  @Input() groupName : string;
+  @Input('ngxMatGroupValidityCheck') groupName : string;
   @Output() groupValidationStatusChange = new EventEmitter();
 
 

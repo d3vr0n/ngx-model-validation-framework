@@ -10,7 +10,7 @@
 <ngx-component-validator [model]="tabdoc" [policy]="ORDER_POLICY_NAME" [policyFnRef]="ORDER_VALIDATION_FN">
 </ngx-component-validator>
 
-<mat-card ngxMatGroupValidityCheck (groupValidationStatusChange)="handleGroupValidationStatusChange($event)">
+<mat-card ngxMatGroupValidityCheck="personal-section" (groupValidationStatusChange)="handleGroupValidationStatusChange($event)">
     <mat-card-title>
         Personal Info
         <mat-icon *ngIf="flags.showPersonalSectionErrorStatus" style="color:red">error_outline</mat-icon>
@@ -45,8 +45,11 @@
     </mat-grid-list>
 </mat-card>
 
-<mat-card>
-    <mat-card-title>Address Info</mat-card-title>
+<mat-card ngxMatGroupValidityCheck="address-section" (groupValidationStatusChange)="handleGroupValidationStatusChange($event)">
+    <mat-card-title>Address Info
+        <mat-icon *ngIf="flags.showAddressSectionErrorStatus" style="color:red">error_outline</mat-icon>
+        <mat-icon *ngIf="!flags.showAddressSectionErrorStatus" style="color:green">check_circle_outline</mat-icon>
+    </mat-card-title>
     <mat-grid-list cols="3" rowHeight="65px">
         <mat-grid-tile>
             <mat-form-field>
@@ -87,8 +90,11 @@
 
 </mat-card>
 
-<mat-card>
-    <mat-card-title>Payment Info</mat-card-title>
+<mat-card ngxMatGroupValidityCheck="payment-section" (groupValidationStatusChange)="handleGroupValidationStatusChange($event)">
+    <mat-card-title>Payment Info
+        <mat-icon *ngIf="flags.showPaymentSectionErrorStatus" style="color:red">error_outline</mat-icon>
+        <mat-icon *ngIf="!flags.showPaymentSectionErrorStatus" style="color:green">check_circle_outline</mat-icon>
+    </mat-card-title>
     <mat-grid-list cols="2" rowHeight="65px">
         <mat-grid-tile>
             <mat-form-field>

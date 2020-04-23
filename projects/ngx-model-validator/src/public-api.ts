@@ -9,7 +9,7 @@ export { NgxMatValidatorDirective } from './lib/ngx-material-validator.directive
 export { NgxComponentValidatorDirective } from './lib/ngx-component-validator.directive';
 export { NgxMatRequiredDirective } from './lib/ngx-material-required.directive';
 export { NgxBootStrapValidatorDirective } from './lib/ngx-bootstrap-validator.directive';
-export { NgxMatGroupValidityCheckDirective } from './lib/ngx-group-validity-check.directive';
+export { NgxMatGroupValidityCheckDirective } from './lib/ngx-mat-group-validity-check.directive';
 
 export { NgxValidatorHelper } from './lib/util/ngx-validator-helper';
 export { NgxValidationPolicy } from './lib/interface/ngx-validation-policy.interface';
