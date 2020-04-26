@@ -2,16 +2,9 @@ import {
   AfterViewInit, Directive, OnInit, Renderer2, ElementRef, OnDestroy, Input, OnChanges, SimpleChanges, NgZone, Output, EventEmitter
 } from '@angular/core';
 
-import { NgxValidationRunnerService } from './service/ngx-validation-runner.service';
-import { NgModel } from '@angular/forms';
 
-
-// TODO : abstract the validation logic in a base class and use it in a child class for
-// any type of UI, e.g. material, bootstrap etc.
 // usage    
-//   ngxBootStrapValidate [validateProperty]="person.age" [model]="person" [policy]="PERSON_POLICY_NAME" [(ngModel)]="person.age"
-
-// try follow https://github.com/rsaenen/ngx-custom-validators/blob/master/src/app/less-than/directive.ts
+// <div ngxBootStrapValidate="group-1" (groupValidationStatusChange)="groupValidationStatusChangeHandler($event)" >
 
 @Directive({
   selector: '[ngxMatGroupValidityCheck]'
@@ -29,9 +22,7 @@ export class NgxMatGroupValidityCheckDirective implements OnInit, AfterViewInit,
 
 
   constructor(
-    private elementRef: ElementRef, private ngZone: NgZone,
-    private renderer2: Renderer2) {
-
+    private elementRef: ElementRef) {
   }
 
 
@@ -49,13 +40,13 @@ export class NgxMatGroupValidityCheckDirective implements OnInit, AfterViewInit,
     this.mutationObserver = new MutationObserver((mutationsList, observer) => {
       for (let mutation of mutationsList) {
         if (mutation.type === 'childList') {
-          // debugger;
+          
           if (mutation.addedNodes.length === 1 && (<any>mutation.addedNodes[0]).tagName === 'SPAN') {
             if ((<any>mutation.addedNodes[0]).innerHTML.trim() === "*") {
               this._requiredStarCount++;
             } else {
             // something else found
-              console.error(mutation.addedNodes[0]);
+              // console.error(mutation.addedNodes[0]);
             }
           } else if (mutation.addedNodes.length === 1 && (<any>mutation.addedNodes[0]).tagName === 'MAT-ERROR') {
 
@@ -69,7 +60,7 @@ export class NgxMatGroupValidityCheckDirective implements OnInit, AfterViewInit,
 
               this._validationMatErrorCount--;
           }
-          console.log(`Required Star Count >> ${this._requiredStarCount}`);
+          // console.log(`Required Star Count >> ${this._requiredStarCount}`);
         }
         else if (mutation.type === 'attributes' && mutation.attributeName === 'class' && (<HTMLElement>mutation.target).tagName ===  'MAT-FORM-FIELD') {
           const classList = (<HTMLElement>mutation.target).classList;

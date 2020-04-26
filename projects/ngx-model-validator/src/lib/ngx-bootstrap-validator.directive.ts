@@ -1,9 +1,10 @@
 import {
-  AfterViewInit, Directive, OnInit, Renderer2, ElementRef, OnDestroy, Input, OnChanges, SimpleChanges, NgZone
+  AfterViewInit, Directive, OnInit, Renderer2, ElementRef, OnDestroy, Input, OnChanges, SimpleChanges, NgZone, Inject
 } from '@angular/core';
 
 import { NgxValidationRunnerService } from './service/ngx-validation-runner.service';
 import { NgModel } from '@angular/forms';
+import { WINDOW } from './util/window-ref';
 
 
 // TODO : abstract the validation logic in a base class and use it in a child class for
@@ -36,7 +37,7 @@ export class NgxBootStrapValidatorDirective implements OnInit, AfterViewInit, On
   constructor(
     private validationService: NgxValidationRunnerService,
     private elementRef: ElementRef, private ngZone: NgZone,
-    private renderer2: Renderer2, private ngModel: NgModel) {
+    private renderer2: Renderer2, @Inject(WINDOW) private _window: any) {
 
   }
 
@@ -47,10 +48,10 @@ export class NgxBootStrapValidatorDirective implements OnInit, AfterViewInit, On
      * message shall come from component validator directive
      */
     // https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
-    window.addEventListener("message", (event: MessageEvent) => {
+    this._window.addEventListener("message", (event: MessageEvent) => {
 
       if (event.data.type === 'validation' && event.data.propertyName === this.validateProperty) {
-        // debugger;
+        
         this.addErrorToBootstrapControl(event.data.operation === 'added' ? event.data.errorMessage : null);
       }
     }, false);
@@ -91,7 +92,7 @@ export class NgxBootStrapValidatorDirective implements OnInit, AfterViewInit, On
 
   testBootstrapElementType() {
     const node = this.elementRef.nativeElement;
-    // debugger;
+    
     if(node.type === 'text') {
       this.isInput = true;
       this.immediateParentNode = node.parentNode;

@@ -1,10 +1,11 @@
 import {
-    AfterViewInit, Directive, DoCheck, OnInit, OnChanges, OnDestroy, Input, SimpleChanges, IterableDiffers, IterableDiffer, IterableChangeRecord, NgZone
+    Directive, OnChanges, OnDestroy, Input, SimpleChanges, IterableDiffers, IterableDiffer, IterableChangeRecord, NgZone, Inject
 } from '@angular/core';
 
 import { NgxValidationRunnerService } from './service/ngx-validation-runner.service';
 import { Subscription } from 'rxjs';
 import { NgxValidationEvent, NgxValidationResult } from './interface/ngx-validation-result-model.interface';
+import { WINDOW } from './util/window-ref';
 
 
 // Top level component validation enabler
@@ -14,7 +15,7 @@ import { NgxValidationEvent, NgxValidationResult } from './interface/ngx-validat
 @Directive({
     selector: 'ngx-component-validator'
 })
-export class NgxComponentValidatorDirective implements OnInit, OnChanges, AfterViewInit, DoCheck, OnDestroy {
+export class NgxComponentValidatorDirective implements OnChanges, OnDestroy {
 
     @Input() model: any;
 
@@ -29,14 +30,8 @@ export class NgxComponentValidatorDirective implements OnInit, OnChanges, AfterV
 
     constructor(
         private differs: IterableDiffers, private ngZone: NgZone,
-        private validationService: NgxValidationRunnerService) {
-
-    }
-
-
-    ngOnInit(): void {
-
-
+        private validationService: NgxValidationRunnerService,
+        @Inject(WINDOW) private _window: any) {
     }
 
     trackByFcForNgxValidationResult = (index,item:NgxValidationResult)=>{
@@ -70,7 +65,7 @@ export class NgxComponentValidatorDirective implements OnInit, OnChanges, AfterV
                                         /**
                                          * https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
                                          */
-                                        window.postMessage(payload, window.location.origin);
+                                        this._window.postMessage(payload, this._window.location.origin);
                                     });
 
                                     differResult.forEachAddedItem((changeRecord: IterableChangeRecord<any>) => {
@@ -79,7 +74,7 @@ export class NgxComponentValidatorDirective implements OnInit, OnChanges, AfterV
                                         /**
                                          * https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
                                          */
-                                        window.postMessage(payload, window.location.origin);
+                                        this._window.postMessage(payload, this._window.location.origin);
                                     });
                                 }
                             });
@@ -104,7 +99,7 @@ export class NgxComponentValidatorDirective implements OnInit, OnChanges, AfterV
                                         /**
                                          * https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
                                          */
-                                        window.postMessage(payload, window.location.origin);
+                                        this._window.postMessage(payload, this._window.location.origin);
                                     });
 
                                     differResult.forEachAddedItem((changeRecord: IterableChangeRecord<any>) => {
@@ -113,7 +108,7 @@ export class NgxComponentValidatorDirective implements OnInit, OnChanges, AfterV
                                         /**
                                          * https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
                                          */
-                                        window.postMessage(payload, window.location.origin);
+                                        this._window.postMessage(payload, this._window.location.origin);
                                     });
                                 });
                             }
@@ -123,14 +118,6 @@ export class NgxComponentValidatorDirective implements OnInit, OnChanges, AfterV
 
                     });
         }
-    }
-
-    ngAfterViewInit() {
-
-    }
-
-    ngDoCheck(): void {
-
     }
 
     ngOnDestroy(): void {

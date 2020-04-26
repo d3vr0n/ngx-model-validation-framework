@@ -1,9 +1,10 @@
 import {
-  AfterViewInit, Directive, OnInit, Renderer2, ElementRef, OnDestroy, Input, OnChanges, SimpleChanges, NgZone
+  AfterViewInit, Directive, OnInit, Renderer2, ElementRef, OnDestroy, Input, NgZone, Inject
 } from '@angular/core';
 
 import { NgxValidationRunnerService } from './service/ngx-validation-runner.service';
 import { NgModel } from '@angular/forms';
+import { WINDOW } from './util/window-ref';
 
 
 // TODO : abstract the validation logic in a base class and use it in a child class for
@@ -17,7 +18,7 @@ import { NgModel } from '@angular/forms';
   selector: '[ngModel][ngxMatValidate]',
   providers: [NgModel]
 })
-export class NgxMatValidatorDirective implements OnInit, AfterViewInit, OnChanges, OnDestroy {
+export class NgxMatValidatorDirective implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() validateProperty: any = {};
 
@@ -36,7 +37,8 @@ export class NgxMatValidatorDirective implements OnInit, AfterViewInit, OnChange
   constructor(
     private validationService: NgxValidationRunnerService,
     private elementRef: ElementRef, private ngZone: NgZone,
-    private renderer2: Renderer2, private ngModel: NgModel) {
+    private renderer2: Renderer2, private ngModel: NgModel,
+    @Inject(WINDOW) private _window: any) {
 
   }
 
@@ -48,10 +50,13 @@ export class NgxMatValidatorDirective implements OnInit, AfterViewInit, OnChange
      */
     // https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
     this.ngZone.runOutsideAngular(() => {
-      window.addEventListener("message", (event: MessageEvent) => {
+      this._window.addEventListener("message", (event: MessageEvent) => {
 
         if (event.data.type === 'validation' && event.data.propertyName === this.validateProperty) {
-          // debugger;
+          
+          /**
+           * should I skip validation if control is disabled ??
+           */
           this.addErrorToMatControl(event.data.operation === 'added' ? event.data.errorMessage : null);
         }
       }, false);
@@ -84,10 +89,6 @@ export class NgxMatValidatorDirective implements OnInit, AfterViewInit, OnChange
     //   this.validationService.validate(this.policy, this.model, this.validateProperty); // no need to subscribe here
     // });
 
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    // TODO : trigger validation of whole model
   }
 
   ngOnDestroy(): void {

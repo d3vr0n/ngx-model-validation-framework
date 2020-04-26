@@ -1,10 +1,11 @@
 import {
-  AfterViewInit, Directive, OnInit, Renderer2, ElementRef, OnDestroy, Input, OnChanges, SimpleChanges, NgZone
+  AfterViewInit, Directive, OnInit, Renderer2, ElementRef, OnDestroy, Input, OnChanges, SimpleChanges, NgZone, Inject
 } from '@angular/core';
 
 import { NgxValidationRunnerService } from './service/ngx-validation-runner.service';
 import { NgModel } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { WINDOW } from './util/window-ref';
 
 
 // TODO : abstract the validation logic in a base class and use it in a child class for
@@ -35,7 +36,8 @@ export class NgxMatRequiredDirective implements OnInit, AfterViewInit, OnChanges
   constructor(
     private validationService: NgxValidationRunnerService,
     private elementRef: ElementRef, private ngZone: NgZone,
-    private renderer2: Renderer2, private ngModel: NgModel) {
+    private renderer2: Renderer2, private ngModel: NgModel,
+    @Inject(WINDOW) private _window: any) {
 
   }
 
@@ -49,10 +51,10 @@ export class NgxMatRequiredDirective implements OnInit, AfterViewInit, OnChanges
     this.ngZone.runOutsideAngular(() => {
 
       // todo : try using https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API
-      window.addEventListener("message", (event: MessageEvent) => {
+      this._window.addEventListener("message", (event: MessageEvent) => {
 
         if (event.data.type === 'required' && event.data.propertyName === this.validateProperty) {
-          // debugger;
+          
           this.addAsteriskToMatControl(event.data.operation === 'added' ? event.data.errorMessage : null);
         }
       }, false);

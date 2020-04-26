@@ -17,7 +17,7 @@ export class AdDirective implements OnInit {
 
   ngOnInit(): void {
     
-    // debugger;
+    
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.compName);
 
     const viewContainerRef = this.viewContainerRef;
