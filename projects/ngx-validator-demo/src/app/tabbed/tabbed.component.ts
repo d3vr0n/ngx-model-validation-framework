@@ -34,6 +34,12 @@ export class TabbedComponent implements OnInit {
     }
   };
 
+  public flags = {
+    showPersonalSectionErrorStatus : true,
+    showAddressSectionErrorStatus : true,
+    showPaymentSectionErrorStatus : true,
+  }
+
   constructor(private valRunnerSvc: NgxValidationRunnerService) { }
 
   validate() {
@@ -47,6 +53,28 @@ export class TabbedComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  handleGroupValidationStatusChange(payload) {
+    if(payload.section === 'personal-section') {
+      if(payload.isValid === 'valid') {
+        this.flags.showPersonalSectionErrorStatus = false;
+      } else {
+        this.flags.showPersonalSectionErrorStatus = true;
+      }
+    } else if(payload.section === 'address-section') {
+      if(payload.isValid === 'valid') {
+        this.flags.showAddressSectionErrorStatus = false;
+      } else {
+        this.flags.showAddressSectionErrorStatus = true;
+      }
+    } else if(payload.section === 'payment-section') {
+      if(payload.isValid === 'valid') {
+        this.flags.showPaymentSectionErrorStatus = false;
+      } else {
+        this.flags.showPaymentSectionErrorStatus = true;
+      }
+    }
   }
 
 }

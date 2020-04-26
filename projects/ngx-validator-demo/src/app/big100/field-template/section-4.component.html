@@ -1,5 +1,8 @@
-<mat-card>
-    <mat-card-title>Section 4</mat-card-title>
+<mat-card ngxMatGroupValidityCheck="section4" (groupValidationStatusChange)="handleGroupValidationStatusChange($event)">
+    <mat-card-title>Section 4
+        <mat-icon *ngIf="showSectionErrorStatus" style="color:red">error_outline</mat-icon>
+        <mat-icon *ngIf="!showSectionErrorStatus" style="color:green">check_circle_outline</mat-icon>
+    </mat-card-title>
     <mat-grid-list cols="5" rowHeight="65px">
         <mat-grid-tile>
             <mat-form-field>
