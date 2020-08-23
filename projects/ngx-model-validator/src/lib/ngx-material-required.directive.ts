@@ -15,7 +15,7 @@ import { WINDOW } from './util/window-ref';
 
 @Directive({
   selector: '[ngModel][ngxMatRequired]',
-  providers: [NgModel]
+  // providers: [NgModel]
 })
 export class NgxMatRequiredDirective implements OnInit, AfterViewInit, OnChanges, OnDestroy {
 

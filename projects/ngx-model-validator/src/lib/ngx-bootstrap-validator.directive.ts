@@ -16,7 +16,7 @@ import { WINDOW } from './util/window-ref';
 
 @Directive({
   selector: '[ngModel][ngxBootStrapValidate]',
-  providers: [NgModel]
+  // providers: [NgModel]
 })
 export class NgxBootStrapValidatorDirective implements OnInit, AfterViewInit, OnChanges, OnDestroy {
 

@@ -53,7 +53,7 @@ export class NgxMatGroupValidityCheckDirective implements OnInit, AfterViewInit,
               // this._validationMatErrorCount++;
             
           } else if (mutation.removedNodes.length === 1 && (<any>mutation.removedNodes[0]).tagName === 'SPAN') {
-            if ((<any>mutation.addedNodes[0]).innerHTML.trim() === "*") {
+            if ((<any>mutation.removedNodes[0]).innerHTML.trim() === "*") {
               this._requiredStarCount--;
             }
           } else if (mutation.removedNodes.length === 1 && (<any>mutation.removedNodes[0]).tagName === 'MAT-ERROR') {

@@ -16,7 +16,7 @@ import { WINDOW } from './util/window-ref';
 
 @Directive({
   selector: '[ngModel][ngxMatValidate]',
-  providers: [NgModel]
+  // providers: [NgModel]
 })
 export class NgxMatValidatorDirective implements OnInit, AfterViewInit, OnDestroy {
 
@@ -37,7 +37,7 @@ export class NgxMatValidatorDirective implements OnInit, AfterViewInit, OnDestro
   constructor(
     private validationService: NgxValidationRunnerService,
     private elementRef: ElementRef, private ngZone: NgZone,
-    private renderer2: Renderer2, private ngModel: NgModel,
+    private renderer2: Renderer2,/* private ngModel: NgModel,*/
     @Inject(WINDOW) private _window: any) {
 
   }

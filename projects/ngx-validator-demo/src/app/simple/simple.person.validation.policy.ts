@@ -17,7 +17,7 @@ export class PersonValidationPolicy implements NgxValidationPolicy {
         const cityAndStateAsyncValidatorFn = async(errorMsg:string, val :any, policy:any, model:any)=>{
 
             // api key get resets everyday - get new one while testing
-            const api_key = "svaHXUsQ5SVsY65BoL0PYsXZGlT7NgaRtA59BtcpmI7xHjoeXkx56E5aXdW9rzyN";
+            const api_key = "GIRvd3rWAdY8VCNxuy97WavI6qBmXDAGQZOty0my1uPCnMrNVt37J6oT8unGYwXE";
             const url = `https://www.zipcodeapi.com/rest/${api_key}/info.json/${val}/radians`;
             const result = await (await fetch(url)).json();
 
