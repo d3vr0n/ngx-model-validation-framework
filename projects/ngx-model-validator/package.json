@@ -9,7 +9,7 @@
   "keywords": [
     "Angular",
     "Angular 2+",
-    "Angular 8",
+    "Angular 9",
     "Angular validation",
     "Angular model validation",
     "fluid validation",
@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/d3vr0n/ngx-model-validation-framework",
   "peerDependencies": {
-    "@angular/common": "^8.2.14",
-    "@angular/core": "^8.2.14"
+    "@angular/common": "^9.1.2",
+    "@angular/core": "^9.1.2"
   }
 }

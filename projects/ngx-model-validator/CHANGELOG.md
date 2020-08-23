@@ -1,3 +1,9 @@
+
+<a name="1.1.0-beta.0"></a>
+# [1.1.0-beta.0](https://github.com/d3vr0n/ngx-model-validation-framework/releases) (2020-08-24)
+* **Angular update to v9**
+* **fix:** no value accessor for form control with unspecified name attribute
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/d3vr0n/ngx-model-validation-framework/releases) (2020-04-26)
 

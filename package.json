@@ -8,6 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "npm-build": "ng build ngx-model-validator",
+    "npm-publish": "npm pack; npm publish",
     "build-demo": "ng build ngx-validator-demo",
     "firebase-use": "firebase use ngx-model-validator",
     "firebase-deploy": "firebase deploy --only hosting"
