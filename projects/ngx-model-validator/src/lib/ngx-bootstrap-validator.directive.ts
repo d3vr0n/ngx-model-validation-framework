@@ -106,28 +106,29 @@ export class NgxBootStrapValidatorDirective implements OnInit, AfterViewInit, On
   }
 
   addErrorToBootstrapControl(errorMsg: string) {
-    let node = this.elementRef.nativeElement;
+    // let node = this.elementRef.nativeElement;
+    this.ngZone.run(() => {
+      if(errorMsg) {
+        if(this.isRadioButton && this.formGroupContainerDiv.className.indexOf('border') > -1) {
+          return;
+        }
+        this.renderer2.addClass(this.formGroupContainerDiv, 'border');
+        this.renderer2.addClass(this.formGroupContainerDiv, 'border-danger');
 
-    if(errorMsg) {
-      if(this.isRadioButton && this.formGroupContainerDiv.className.indexOf('border') > -1) {
-        return;
+        const errorHolder = document.createElement('span');
+        const textNode = document.createTextNode(errorMsg);
+        errorHolder.appendChild(textNode);
+        this.immediateParentNode.appendChild(errorHolder);
+        
+      } else {
+        this.renderer2.removeClass(this.formGroupContainerDiv, 'border');
+        this.renderer2.removeClass(this.formGroupContainerDiv, 'border-danger');
+        const errorTextNode = this.immediateParentNode.lastChild;
+        if(errorTextNode.tagName === 'SPAN') {
+          this.immediateParentNode.removeChild(errorTextNode);
+        }
       }
-      this.renderer2.addClass(this.formGroupContainerDiv, 'border');
-      this.renderer2.addClass(this.formGroupContainerDiv, 'border-danger');
-
-      const errorHolder = document.createElement('span');
-      const textNode = document.createTextNode(errorMsg);
-      errorHolder.appendChild(textNode);
-      this.immediateParentNode.appendChild(errorHolder);
-      
-    } else {
-      this.renderer2.removeClass(this.formGroupContainerDiv, 'border');
-      this.renderer2.removeClass(this.formGroupContainerDiv, 'border-danger');
-      const errorTextNode = this.immediateParentNode.lastChild;
-      if(errorTextNode.tagName === 'SPAN') {
-        this.immediateParentNode.removeChild(errorTextNode);
-      }
-    }
+    });
   };
 
 }

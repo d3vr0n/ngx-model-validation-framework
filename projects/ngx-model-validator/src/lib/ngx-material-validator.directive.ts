@@ -182,27 +182,29 @@ export class NgxMatValidatorDirective implements OnInit, AfterViewInit, OnDestro
 
 
   addMatErrorsToHtml(errorElement: any, node: any, errorMsg: string, cssErrorClass: string) {
-    if (!!errorElement) {
-      const errorExistingNodes = errorElement.querySelectorAll('mat-error');
-      this.renderer2.removeClass(node, cssErrorClass);
-      if (!!errorExistingNodes && errorExistingNodes.length > 0) {
-        errorExistingNodes.forEach(errorNode => {
-          this.renderer2.removeChild(errorElement, errorNode);
-        });
+    this.ngZone.run(() => {
+      if (!!errorElement) {
+        const errorExistingNodes = errorElement.querySelectorAll('mat-error');
+        this.renderer2.removeClass(node, cssErrorClass);
+        if (!!errorExistingNodes && errorExistingNodes.length > 0) {
+          errorExistingNodes.forEach(errorNode => {
+            this.renderer2.removeChild(errorElement, errorNode);
+          });
+        }
+        // add mat-error block
+        if (!!errorMsg) {
+
+          const errorElem = document.createElement('mat-error');
+          const textNode = document.createTextNode(errorMsg);
+          errorElem.appendChild(textNode);
+          errorElem.className = 'mat-error';
+
+          const refDivNode = errorElement.querySelector('div');
+          this.renderer2.insertBefore(errorElement, errorElem, refDivNode);
+          this.renderer2.addClass(node, cssErrorClass);
+
+        }
       }
-      // add mat-error block
-      if (!!errorMsg) {
-
-        const errorElem = document.createElement('mat-error');
-        const textNode = document.createTextNode(errorMsg);
-        errorElem.appendChild(textNode);
-        errorElem.className = 'mat-error';
-
-        const refDivNode = errorElement.querySelector('div');
-        this.renderer2.insertBefore(errorElement, errorElem, refDivNode);
-        this.renderer2.addClass(node, cssErrorClass);
-
-      }
-    }
+    });
   };
 }

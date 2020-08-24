@@ -194,31 +194,33 @@ export class NgxMatRequiredDirective implements OnInit, AfterViewInit, OnChanges
 
   };
 
-  addAsteriskToSpanElement = function (spanRequiredContainer: any, inputSpanElement: any, errorMsg: string) {
-    if (spanRequiredContainer && spanRequiredContainer.length > 0) {
-      spanRequiredContainer.forEach(requiredNode => {
-        this.renderer2.removeChild(inputSpanElement, requiredNode);
-      });
-    }
-    if (!!errorMsg) {
-      const starSpanElement = document.createElement('span');
-      const textNode = document.createTextNode(" *");
-      starSpanElement.appendChild(textNode);
+  addAsteriskToSpanElement = (spanRequiredContainer: any, inputSpanElement: any, errorMsg: string)=> {
+    this.ngZone.run(()=>{
+      if (spanRequiredContainer && spanRequiredContainer.length > 0) {
+        spanRequiredContainer.forEach(requiredNode => {
+          this.renderer2.removeChild(inputSpanElement, requiredNode);
+        });
+      }
+      if (!!errorMsg) {
+        const starSpanElement = document.createElement('span');
+        const textNode = document.createTextNode(" *");
+        starSpanElement.appendChild(textNode);
 
-      this.renderer2.addClass(starSpanElement, "mat-placeholder-required");
-      this.renderer2.addClass(starSpanElement, "mat-form-field-required-marker");
-      this.renderer2.addClass(starSpanElement, "label-required");
+        this.renderer2.addClass(starSpanElement, "mat-placeholder-required");
+        this.renderer2.addClass(starSpanElement, "mat-form-field-required-marker");
+        this.renderer2.addClass(starSpanElement, "label-required");
 
-      inputSpanElement.appendChild(starSpanElement);
-      /**
-       * label-required class controls the color of asterisk
-       * add color in demo project styles.css
-       * .label-required { color: red; }
-       */
-      // this.renderer2.addClass(inputSpanElement, "label-required");
-    } else if (inputSpanElement.classList && inputSpanElement.classList.value.indexOf("label-required") > -1) {
-      this.renderer2.removeClass(inputSpanElement, "label-required");
-    }
+        inputSpanElement.appendChild(starSpanElement);
+        /**
+         * label-required class controls the color of asterisk
+         * add color in demo project styles.css
+         * .label-required { color: red; }
+         */
+        // this.renderer2.addClass(inputSpanElement, "label-required");
+      } else if (inputSpanElement.classList && inputSpanElement.classList.value.indexOf("label-required") > -1) {
+        this.renderer2.removeClass(inputSpanElement, "label-required");
+      }
+    });
   };
 
 }

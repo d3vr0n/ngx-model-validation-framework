@@ -11,7 +11,7 @@ import { MatToolbarModule} from '@angular/material/toolbar';
 import { MatTabsModule} from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
-import { CdkScrollableModule } from '@angular/cdk/scrolling';
+import { CdkScrollableModule, ScrollingModule } from '@angular/cdk/scrolling';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -58,7 +58,7 @@ import { Section10Component } from './big100/field-template/section-10.component
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,FormsModule,
-    NgxValidationModule, MatIconModule, CdkScrollableModule,
+    NgxValidationModule, MatIconModule, CdkScrollableModule, ScrollingModule,
     SimpleNotificationsModule.forRoot(),
     MatCardModule,MatGridListModule,MatFormFieldModule,MatRadioModule,MatInputModule, MatButtonModule, MatSelectModule, MatToolbarModule, MatTabsModule
   ],
