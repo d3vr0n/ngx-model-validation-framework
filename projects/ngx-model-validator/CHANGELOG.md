@@ -1,6 +1,6 @@
 
-<a name="1.1.0"></a>
-# [1.1.0](https://github.com/d3vr0n/ngx-model-validation-framework/releases) (2020-08-24)
+<a name="1.1.1"></a>
+# [1.1.1](https://github.com/d3vr0n/ngx-model-validation-framework/releases) (2020-08-25)
 * **Angular update to v9**
 * **fix:** no value accessor for form control with unspecified name attribute
 * **fix:** error message was not disappearing as soon as we tab out of field
