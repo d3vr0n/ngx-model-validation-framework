@@ -1,8 +1,18 @@
 version: 2.1
 orbs:
-  node: circleci/node@5.1.0
+  node: circleci/node@6.1.0
+jobs:
+  example-job:
+    docker:
+      # replace with your preferred image
+      - image: cimg/base:stable
+    steps:
+      - node/install:
+          node-version: latest 
+
 workflows:
   run-npm-command:
     jobs:
+      - example-job
       - node/run:
           npm-run: build
