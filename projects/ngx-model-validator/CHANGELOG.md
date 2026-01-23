@@ -1,4 +1,11 @@
 
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/d3vr0n/ngx-model-validation-framework/releases) (2025-08-27)
+* **Angular update to v16**
+* **feat:** Support for MDC-based Material components
+* **fix:** Updated Material class names to match Angular Material 16
+* **chore:** Updated dependencies to Angular 16.2.x
+
 <a name="1.1.1"></a>
 # [1.1.1](https://github.com/d3vr0n/ngx-model-validation-framework/releases) (2020-08-25)
 * **Angular update to v9**

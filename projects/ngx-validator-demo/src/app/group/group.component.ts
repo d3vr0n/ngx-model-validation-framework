@@ -3,9 +3,10 @@ import { OrderValidationPolicy } from '../tabbed/tabbed.order.validation.policy'
 import { NgxValidationRunnerService } from 'ngx-model-validator';
 
 @Component({
-  selector: 'app-group',
-  templateUrl: './group.component.html',
-  styleUrls: ['./group.component.css']
+    selector: 'app-group',
+    templateUrl: './group.component.html',
+    styleUrls: ['./group.component.css'],
+    standalone: false
 })
 export class GroupComponent implements OnInit {
 

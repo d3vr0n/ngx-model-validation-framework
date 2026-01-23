@@ -10,7 +10,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ngx-model-validator/tsconfig.lib.json",
             "project": "projects/ngx-model-validator/ng-package.json"
@@ -21,6 +21,10 @@
           "options": {
             "main": "projects/ngx-model-validator/src/test.ts",
             "tsConfig": "projects/ngx-model-validator/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "karmaConfig": "projects/ngx-model-validator/karma.conf.js"
           }
         },
@@ -46,14 +50,14 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/ngx-validator-demo",
+            "outputPath": {
+              "base": "dist/ngx-validator-demo"
+            },
             "index": "projects/ngx-validator-demo/src/index.html",
-            "main": "projects/ngx-validator-demo/src/main.ts",
-            "polyfills": "projects/ngx-validator-demo/src/polyfills.ts",
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/ngx-validator-demo/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ngx-validator-demo/src/favicon.ico",
               "projects/ngx-validator-demo/src/assets"
@@ -64,7 +68,8 @@
             "scripts": [
               "./node_modules/jquery/dist/jquery.js",
               "./node_modules/bootstrap/dist/js/bootstrap.js"
-            ]
+            ],
+            "browser": "projects/ngx-validator-demo/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -77,12 +82,8 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -95,31 +96,38 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "ngx-validator-demo:build"
-          },
           "configurations": {
             "production": {
-              "browserTarget": "ngx-validator-demo:build:production"
+              "buildTarget": "ngx-validator-demo:build:production"
+            },
+            "development": {
+              "buildTarget": "ngx-validator-demo:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngx-validator-demo:build"
+            "buildTarget": "ngx-validator-demo:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "projects/ngx-validator-demo/src/test.ts",
-            "polyfills": "projects/ngx-validator-demo/src/polyfills.ts",
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/ngx-validator-demo/tsconfig.spec.json",
             "karmaConfig": "projects/ngx-validator-demo/karma.conf.js",
             "assets": [
@@ -158,6 +166,35 @@
           }
         }
       }
-    }},
-  "defaultProject": "ngx-model-validator"
+    }
+  },
+  "cli": {
+    "analytics": false
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
+    }
+  }
 }

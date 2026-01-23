@@ -19,9 +19,10 @@ import { Section10Component } from './field-template/section-10.component';
 import { GroupComponent } from '../group/group.component';
 
 @Component({
-  selector: 'app-big100',
-  templateUrl: './big100.component.html',
-  styleUrls: ['./big100.component.css']
+    selector: 'app-big100',
+    templateUrl: './big100.component.html',
+    styleUrls: ['./big100.component.css'],
+    standalone: false
 })
 export class Big100Component implements OnInit {
   // TODO : follow https://stackblitz.com/angular/bekxqjgareq?file=src%2Fapp%2Fad.service.ts

@@ -1,8 +1,131 @@
-/* You can add global styles to this file, and also import other style files */
-
+/* Import all stylesheets first */
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
-@import "~bootstrap/dist/css/bootstrap.css";
+@import 'bootstrap/dist/css/bootstrap.css';
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+/* Improves label alignment */
+label {
+  margin-bottom: 0;
+  font-size: 16px;
+}
+
+/* Card title styles */
+mat-card-title {
+  font-size: 20px !important;
+  font-weight: 500 !important;
+  padding: 16px 0 0 8px !important;
+  margin-bottom: 16px !important;
+}
+
+/* Fix for icon spacing in tabs and cards */
+.example-tab-icon,
+.status-icon {
+  margin-left: 8px;
+}
+
+/* Common styles for card titles */
+.card-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 40px;
+  padding: 0 8px;
+}
+
+/* Common styles for form layouts */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+/* Fixes for grid tile alignment */
+mat-grid-tile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5px !important;
+  overflow: visible !important;
+}
+
+/* Ensures grid tile content doesn't get cut off */
+.mat-grid-tile .mat-figure {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 8px;
+}
+
+/* Consistent grid list layout */
+mat-grid-list {
+  width: 100%;
+  padding: 8px 0 !important;
+  margin-bottom: 8px;
+}
+
+/* Improves label alignment */
+label {
+  margin-bottom: 0;
+  font-size: 16px;
+}
+
+/* Fill remaining space utility */
+.example-fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+/* Consistent form field appearance */
+.mat-mdc-form-field.mat-form-field-appearance-outline,
+.mat-mdc-form-field {
+  width: 90%;
+}
+
+/* Fix for form field outline borders being cut off */
+.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* Consistent card layout and spacing */
+.mat-mdc-card {
+  display: flex;
+  flex-direction: column;
+  margin: 16px;
+  padding: 0;
+}
+
+/* Ensure consistent spacing inside cards */
+.mat-mdc-card-content {
+  padding: 8px 16px 16px 16px !important;
+}
+
+/* Increase vertical padding to prevent top outline cutoff */
+.mat-mdc-form-field {
+  padding-top: 8px !important;
+  margin-bottom: 8px;
+}
+
+/* Specific fix for MDC text field wrapper */
+.mat-mdc-text-field-wrapper {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+/* Ensure outline displays correctly */
+.mdc-notched-outline__leading,
+.mdc-notched-outline__notch,
+.mdc-notched-outline__trailing {
+  border-top-style: solid !important;
+}
+
+/* Fix for label positioning in outline fields */
+.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-infix {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
 
 .material-icons {
   font-size: 32px;
@@ -20,5 +143,50 @@ body {
 
 .label-required {
   color: red !important;
+}
+
+/* Fix for mat-form-field borders getting cut off in Angular Material 16+ */
+.mat-mdc-form-field {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.mat-grid-tile .mat-mdc-form-field {
+  width: 90%;
+}
+
+/* Ensure proper padding and alignment within form fields */
+.mat-mdc-form-field-infix {
+  padding: 0.5em 0;
+  width: 100% !important;
+}
+
+/* Fix for form fields in grid tiles */
+mat-grid-tile mat-form-field {
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* Prevent clipping of mat-form-field borders */
+.mat-mdc-text-field-wrapper {
+  margin-bottom: 4px;
+}
+
+/* Fix for inputs in grid layouts */
+mat-grid-list {
+  margin-bottom: 10px;
+}
+
+/* Ensure form fields don't overflow their containers */
+.mat-mdc-form-field-flex {
+  display: inline-flex;
+  align-items: baseline;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Fix for the icon spacing in tabs and cards */
+.example-tab-icon {
+  margin-left: 8px;
 }
 

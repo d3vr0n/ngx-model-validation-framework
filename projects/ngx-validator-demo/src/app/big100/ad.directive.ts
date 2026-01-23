@@ -2,7 +2,8 @@ import { Directive, ViewContainerRef, ComponentFactoryResolver, Input, OnInit, V
 // import { Section1Component } from './field-template/section-1.component';
 
 @Directive({
-  selector: '[ad-host]',
+    selector: '[ad-host]',
+    standalone: false
 })
 export class AdDirective implements OnInit {
 

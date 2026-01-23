@@ -8,7 +8,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { MatSelectModule} from '@angular/material/select';
 import { MatToolbarModule} from '@angular/material/toolbar';
-import { MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { CdkScrollableModule, ScrollingModule } from '@angular/cdk/scrolling';
@@ -64,15 +64,15 @@ import { Section10Component } from './big100/field-template/section-10.component
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [Section1Component,
-    Section2Component,
-    Section3Component,
-    Section4Component,
-    Section5Component,
-    Section6Component,
-    Section7Component,
-    Section8Component,
-    Section9Component,
-    Section10Component,]
+  // entryComponents: [Section1Component,
+  //   Section2Component,
+  //   Section3Component,
+  //   Section4Component,
+  //   Section5Component,
+  //   Section6Component,
+  //   Section7Component,
+  //   Section8Component,
+  //   Section9Component,
+  //   Section10Component,]
 })
 export class AppModule { }

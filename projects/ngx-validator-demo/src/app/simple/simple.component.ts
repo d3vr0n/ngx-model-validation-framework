@@ -4,9 +4,10 @@ import { NgxValidationRunnerService } from 'ngx-model-validator';
 import { NotificationsService, NotificationType } from 'angular2-notifications';
 
 @Component({
-  selector: 'app-simple',
-  templateUrl: './simple.component.html',
-  styleUrls: ['./simple.component.css']
+    selector: 'app-simple',
+    templateUrl: './simple.component.html',
+    styleUrls: ['./simple.component.css'],
+    standalone: false
 })
 export class SimpleComponent implements OnInit {
 

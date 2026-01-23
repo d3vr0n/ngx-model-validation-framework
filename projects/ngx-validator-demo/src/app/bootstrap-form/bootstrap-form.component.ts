@@ -4,9 +4,10 @@ import { NgxValidationRunnerService } from 'ngx-model-validator';
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
-  selector: 'app-bootstrap-form',
-  templateUrl: './bootstrap-form.component.html',
-  styleUrls: ['./bootstrap-form.component.css']
+    selector: 'app-bootstrap-form',
+    templateUrl: './bootstrap-form.component.html',
+    styleUrls: ['./bootstrap-form.component.css'],
+    standalone: false
 })
 export class BootstrapFormComponent implements OnInit {
 

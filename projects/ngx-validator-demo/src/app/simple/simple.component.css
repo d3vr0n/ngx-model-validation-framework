@@ -1,13 +1,72 @@
-::ng-deep mat-radio-group > .mat-radio-button {
+::ng-deep mat-radio-group > .mat-mdc-radio-button {
     padding-right: 15px;
+    margin-bottom: 0;
 }
 
 mat-card {
     margin: 10px;
 }
 
+mat-card-title {
+    padding: 16px 16px 0 16px !important;
+}
+
 .example-fill-remaining-space {
     /* This fills the remaining space, by using flexbox. 
        Every toolbar row uses a flexbox row layout. */
     flex: 1 1 auto;
-  }
+}
+
+.card-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 0;
+}
+
+.flex-item {
+    width: 100%;
+}
+
+/* Gender field alignment fix */
+.gender-field-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0 16px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.gender-label {
+    margin-right: 12px;
+    font-size: 16px;
+    min-width: 60px;
+    text-align: left;
+}
+
+/* Fix radio buttons to be on the same line */
+.radio-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+/* Title text alignment */
+.title-text {
+    padding-left: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+/* Fix radio button alignment */
+.mat-mdc-radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}

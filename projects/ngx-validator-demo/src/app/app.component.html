@@ -1,14 +1,14 @@
-<div style="padding: 10px; ">
+<div style="padding: 10px;">
     <!-- <button mat-raised-button color="accent" [routerLink]="['/simple']">Simple</button> display: flex; justify-content: space-around;
 <button mat-raised-button color="accent" [routerLink]="['/group']">Group</button>
 <button mat-raised-button color="accent" [routerLink]="['/big100']">Big 100 input</button>
 <button mat-raised-button color="accent" [routerLink]="['/tabbed']">Tabbed</button> -->
-    <nav mat-tab-nav-bar mat-stretch-tabs [color]="'accent'">
-        <a mat-tab-link [routerLink]="['/simple']">Simple</a>
-        <a mat-tab-link [routerLink]="['/group']">Group</a>
-        <a mat-tab-link [routerLink]="['/big100']">Big 100 input</a>
-        <a mat-tab-link [routerLink]="['/tabbed']">Tabbed</a>
-        <a mat-tab-link [routerLink]="['/bs-form']">bootstrap Form</a>
+    <nav style="display: flex; width: 100%;">
+        <a mat-button [routerLink]="['/simple']" style="flex: 1;">Simple</a>
+        <a mat-button [routerLink]="['/group']" style="flex: 1;">Group</a>
+        <a mat-button [routerLink]="['/big100']" style="flex: 1;">Big 100 input</a>
+        <a mat-button [routerLink]="['/tabbed']" style="flex: 1;">Tabbed</a>
+        <a mat-button [routerLink]="['/bs-form']" style="flex: 1;">bootstrap Form</a>
     </nav>
 </div>
 <simple-notifications></simple-notifications>
