@@ -3,6 +3,7 @@
        Every toolbar row uses a flexbox row layout. */
     flex: 1 1 auto;
   }
+  
   ::ng-deep mat-card {
       margin: 10px;
   }
@@ -11,9 +12,30 @@
     height: calc(100% - 140px);
     width: auto;
     border: 1px solid black;
+    padding: 10px;
   }
   
   .example-item {
     margin: 10px;
     height: auto;
+  }
+  
+  /* Card title container layout */
+  ::ng-deep .card-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  /* Status icon styling */
+  ::ng-deep .status-icon {
+    margin-left: 8px;
+    margin-right: 0;
+    font-size: 20px;
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+    height: 20px;
+    width: 20px;
   }

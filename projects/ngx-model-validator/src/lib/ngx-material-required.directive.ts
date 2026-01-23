@@ -14,8 +14,8 @@ import { WINDOW } from './util/window-ref';
 //   ngxMatRequired [validateProperty]="person.age" [model]="person" [policy]="PERSON_POLICY_NAME" [(ngModel)]="person.age"
 
 @Directive({
-  selector: '[ngModel][ngxMatRequired]',
-  // providers: [NgModel]
+    selector: '[ngModel][ngxMatRequired]',
+    standalone: false
 })
 export class NgxMatRequiredDirective implements OnInit, AfterViewInit, OnChanges, OnDestroy {
 
@@ -95,30 +95,38 @@ export class NgxMatRequiredDirective implements OnInit, AfterViewInit, OnChanges
 
       value = value.toUpperCase();
 
-      if (value === 'MAT-INPUT-ELEMENT' || value === 'MAT-SELECT') {
-        acc.push('MAT-FORM-FIELD'); return acc;
-      } else if (value === 'MAT-RADIO-INPUT' || value === 'MAT-RADIO-GROUP') {
-        acc.push('MAT-RADIO-GROUP'); return acc;
-      } else if (value === 'MAT-CHECKBOX-INPUT' || value === 'MAT-CHECKBOX') {
-        acc.push('MAT-CHECKBOX'); return acc;
+      if (value === 'MAT-MDC-INPUT-ELEMENT' || value === 'MAT-MDC-SELECT') {
+        acc.push('MAT-MDC-FORM-FIELD'); return acc;
+      } else if (value === 'MAT-MDC-RADIO-INPUT' || value === 'MAT-MDC-RADIO-GROUP') {
+        acc.push('MAT-MDC-RADIO-GROUP'); return acc;
+      } else if (value === 'MAT-MDC-CHECKBOX-INPUT' || value === 'MAT-MDC-CHECKBOX') {
+        acc.push('MAT-MDC-CHECKBOX'); return acc;
       } else {
         return acc;
       }
     }, []);
 
+    // Default to MAT-FORM-FIELD if no specific material element class is found
+    if (elementClass.length === 0) {
+      this.parentNodeName = 'MAT-FORM-FIELD';
+      this.depthOfParentNode = 5;
+      this.isInput = true;
+      return;
+    }
+    
     switch (elementClass[0].toUpperCase()) {
-      case 'MAT-CHECKBOX':
+      case 'MAT-MDC-CHECKBOX':
         this.parentNodeName = 'MAT-CHECKBOX';
         this.depthOfParentNode = 3;
         this.isCheckbox = true;
         break;
-      case 'MAT-RADIO-GROUP':
+      case 'MAT-MDC-RADIO-GROUP':
         this.parentNodeName = 'MAT-RADIO-GROUP';
         this.depthOfParentNode = 3;
         this.isRadioButton = true;
         break;
-      case 'MAT-FORM-FIELD':
-      case 'MAT-SELECT':
+      case 'MAT-MDC-FORM-FIELD':
+      case 'MAT-MDC-SELECT':
         this.parentNodeName = 'MAT-FORM-FIELD';
         this.depthOfParentNode = 4;
         this.isInput = true;
@@ -132,7 +140,7 @@ export class NgxMatRequiredDirective implements OnInit, AfterViewInit, OnChanges
 
     if (this.isCheckbox || this.isRadioButton) {
 
-      this.renderer2.addClass(node, 'mat-form-field');
+      this.renderer2.addClass(node, 'mat-mdc-form-field');
       let errorValidationContainer = node.querySelector('.ui-validation-transitionMessages');
 
       if (errorValidationContainer === null) {
@@ -159,32 +167,41 @@ export class NgxMatRequiredDirective implements OnInit, AfterViewInit, OnChanges
     }
 
     if (this.isInput) {
-      const inputFormFieldElement = node.querySelector('.mat-form-field-label');
+      // Try MDC class first, then fallback to non-MDC class
+      const inputFormFieldElement = node.querySelector('.mat-mdc-form-field-label') || 
+                                  node.querySelector('.mat-form-field-label');
 
       if (inputFormFieldElement) {
-        const spanRequiredContainer = inputFormFieldElement.querySelectorAll(".mat-placeholder-required");
+        const spanRequiredContainer = inputFormFieldElement.querySelectorAll(".mat-mdc-form-field-required-marker") ||
+                                    inputFormFieldElement.querySelectorAll(".mat-placeholder-required");
 
         this.addAsteriskToSpanElement(spanRequiredContainer, inputFormFieldElement, errorMsg);
       }
     }
 
     if (this.isCheckbox) {
-      const checkboxSpanElement = node.querySelector('.mat-checkbox-label');
+      // Try MDC class first, then fallback to non-MDC class
+      const checkboxSpanElement = node.querySelector('.mat-mdc-checkbox-label') || 
+                               node.querySelector('.mat-checkbox-label');
 
       if (checkboxSpanElement) {
-        const spanRequiredContainer = checkboxSpanElement.querySelectorAll(".mat-placeholder-required");
+        const spanRequiredContainer = checkboxSpanElement.querySelectorAll(".mat-mdc-form-field-required-marker") ||
+                                    checkboxSpanElement.querySelectorAll(".mat-placeholder-required");
 
         this.addAsteriskToSpanElement(spanRequiredContainer, checkboxSpanElement, checkboxSpanElement);
       }
     }
 
     if (this.isRadioButton) {
-      const matradioSpanElement = node.querySelectorAll('.mat-radio-label-content');
+      // Try MDC class first, then fallback to non-MDC class
+      const matradioSpanElement = node.querySelectorAll('.mat-mdc-radio-label-content') ||
+                                node.querySelectorAll('.mat-radio-label-content');
 
       if (matradioSpanElement && matradioSpanElement.length > 0) {
 
         matradioSpanElement.forEach(elem => {
-          const spanRequiredContainer = elem.querySelectorAll(".mat-placeholder-required");
+          const spanRequiredContainer = elem.querySelectorAll(".mat-mdc-form-field-required-marker") ||
+                                      elem.querySelectorAll(".mat-placeholder-required");
 
           this.addAsteriskToSpanElement(spanRequiredContainer, elem, errorMsg);
         });
@@ -206,8 +223,8 @@ export class NgxMatRequiredDirective implements OnInit, AfterViewInit, OnChanges
         const textNode = document.createTextNode(" *");
         starSpanElement.appendChild(textNode);
 
+        this.renderer2.addClass(starSpanElement, "mat-mdc-form-field-required-marker");
         this.renderer2.addClass(starSpanElement, "mat-placeholder-required");
-        this.renderer2.addClass(starSpanElement, "mat-form-field-required-marker");
         this.renderer2.addClass(starSpanElement, "label-required");
 
         inputSpanElement.appendChild(starSpanElement);

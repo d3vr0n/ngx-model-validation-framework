@@ -7,7 +7,8 @@ import {
 // <div ngxBootStrapValidate="group-1" (groupValidationStatusChange)="groupValidationStatusChangeHandler($event)" >
 
 @Directive({
-  selector: '[ngxMatGroupValidityCheck]'
+    selector: '[ngxMatGroupValidityCheck]',
+    standalone: false
 })
 export class NgxMatGroupValidityCheckDirective implements OnInit, AfterViewInit, OnChanges, OnDestroy {
 
@@ -50,7 +51,7 @@ export class NgxMatGroupValidityCheckDirective implements OnInit, AfterViewInit,
             }
           } else if (mutation.addedNodes.length === 1 && (<any>mutation.addedNodes[0]).tagName === 'MAT-ERROR') {
 
-              // this._validationMatErrorCount++;
+              this._validationMatErrorCount++;
             
           } else if (mutation.removedNodes.length === 1 && (<any>mutation.removedNodes[0]).tagName === 'SPAN') {
             if ((<any>mutation.removedNodes[0]).innerHTML.trim() === "*") {

@@ -15,8 +15,8 @@ import { WINDOW } from './util/window-ref';
 // try follow https://github.com/rsaenen/ngx-custom-validators/blob/master/src/app/less-than/directive.ts
 
 @Directive({
-  selector: '[ngModel][ngxBootStrapValidate]',
-  // providers: [NgModel]
+    selector: '[ngModel][ngxBootStrapValidate]',
+    standalone: false
 })
 export class NgxBootStrapValidatorDirective implements OnInit, AfterViewInit, OnChanges, OnDestroy {
 

@@ -13,7 +13,8 @@ import { WINDOW } from './util/window-ref';
 // publish to ngx-mat-validator via observable and runner service
 
 @Directive({
-    selector: 'ngx-component-validator'
+    selector: 'ngx-component-validator',
+    standalone: false
 })
 export class NgxComponentValidatorDirective implements OnChanges, OnDestroy {
 

@@ -1,12 +1,174 @@
+/* Component-specific styles */
 .example-fill-remaining-space {
     /* This fills the remaining space, by using flexbox. 
        Every toolbar row uses a flexbox row layout. */
     flex: 1 1 auto;
   }
+  
   mat-card {
       margin: 10px;
+      display: flex;
+      flex-direction: column;
+      overflow: visible !important;
+      height: auto !important;
+      min-height: 300px !important; /* Ensure enough height for content */
+      padding: 16px !important;
+  }
+  
+  /* Ensure proper spacing for card content */
+  mat-card-content {
+      padding: 16px !important;
+      margin: 0 !important;
+      overflow: visible !important;
+      padding-bottom: 30px !important;
   }
 
+  /* Use common styles for tab icons */
   .example-tab-icon {
-    margin-left: 10px;
+    margin-left: 8px;
+    margin-right: 0;
+    font-size: 20px;
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+    height: 20px;
+    width: 20px;
+  }
+  
+  /* Consistent appearance for card titles */
+  .card-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  /* Ensure proper alignment in tab labels */
+  ::ng-deep .mat-mdc-tab-label-content {
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+  
+  /* Fix for tab body content */
+  ::ng-deep .mat-mdc-tab-body-content {
+    overflow: visible !important;
+    height: auto !important;
+  }
+  
+  /* Fix for tab body wrapper */
+  ::ng-deep .mat-mdc-tab-body-wrapper {
+    overflow: visible !important;
+  }
+  
+  /* Form field fixes for tabbed layout */
+  ::ng-deep .mat-mdc-form-field {
+    width: 100%;
+    margin: 0 8px;
+    margin-bottom: 4px !important;
+  }
+  
+  /* Fix padding around form fields */
+  ::ng-deep .mat-mdc-form-field-infix {
+    padding-bottom: 0px !important;
+    min-height: 40px !important;
+  }
+  
+  /* Ensure proper spacing in grid tiles */
+  mat-grid-tile {
+    overflow: visible !important;
+  }
+  
+  /* Fix for grid tile figure */
+  ::ng-deep mat-grid-tile .mat-grid-tile-content {
+    height: 100% !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    overflow: visible !important;
+    padding: 8px !important;
+  }
+  
+  /* Ensure grid tiles can accommodate form fields with errors */
+  mat-grid-tile mat-form-field {
+    width: 100%;
+    height: auto !important;
+  }
+  
+  /* Adjust layout of grid tiles */
+  ::ng-deep .mat-grid-tile-content {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 8px !important;
+    overflow: visible !important;
+  }
+  
+  /* Fix for mat-form-field-subscript-wrapper positioning */
+  ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+    position: static !important;
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+    clear: both !important;
+    display: block !important;
+  }
+  
+  /* Fix for error display */
+  ::ng-deep .mat-mdc-form-field-error-wrapper {
+    padding: 0 !important;
+    position: static !important;
+    clear: both !important;
+    margin-top: 0px !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+  
+  /* Ensure hint wrapper displays correctly */
+  ::ng-deep .mat-mdc-form-field-hint-wrapper {
+    position: static !important;
+    margin-top: 0px !important;
+    width: 100% !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Ensure grid list is properly sized */
+  mat-grid-list {
+    overflow: visible !important;
+    margin-bottom: 16px !important;
+  }
+  
+  /* Fix for the text field wrapper to ensure errors display correctly */
+  ::ng-deep .mat-mdc-text-field-wrapper {
+    overflow: visible !important;
+    width: 100% !important;
+  }
+  
+  /* Fix for input field height */
+  ::ng-deep .mdc-text-field {
+    overflow: visible !important;
+  }
+  
+  /* Fix for the form field appearance */
+  ::ng-deep .mat-mdc-form-field-appearance-outline {
+    overflow: visible !important;
+  }
+  
+  /* Ensure error messages are displayed properly */
+  ::ng-deep .mat-mdc-form-field-error {
+    font-size: 12px !important;
+    margin-top: 0px !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+  }
+  
+  /* Ensure proper spacing for form field bottom section */
+  ::ng-deep .mdc-text-field--outlined {
+    margin-bottom: 0px !important;
+  }
+  
+  /* Fix for MDC form field bottom spacing */
+  ::ng-deep .mat-mdc-form-field-bottom-align {
+    height: 0px !important;
+    min-height: 0px !important;
   }

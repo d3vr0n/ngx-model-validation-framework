@@ -3,7 +3,6 @@ import {
 } from '@angular/core';
 
 import { NgxValidationRunnerService } from './service/ngx-validation-runner.service';
-import { NgModel } from '@angular/forms';
 import { WINDOW } from './util/window-ref';
 
 
@@ -15,8 +14,8 @@ import { WINDOW } from './util/window-ref';
 // try follow https://github.com/rsaenen/ngx-custom-validators/blob/master/src/app/less-than/directive.ts
 
 @Directive({
-  selector: '[ngModel][ngxMatValidate]',
-  // providers: [NgModel]
+    selector: '[ngModel][ngxMatValidate]',
+    standalone: false
 })
 export class NgxMatValidatorDirective implements OnInit, AfterViewInit, OnDestroy {
 
@@ -104,30 +103,38 @@ export class NgxMatValidatorDirective implements OnInit, AfterViewInit, OnDestro
 
       value = value.toUpperCase();
 
-      if (value === 'MAT-INPUT-ELEMENT' || value === 'MAT-SELECT') {
-        acc.push('MAT-FORM-FIELD'); return acc;
-      } else if (value === 'MAT-RADIO-INPUT' || value === 'MAT-RADIO-GROUP') {
-        acc.push('MAT-RADIO-GROUP'); return acc;
-      } else if (value === 'MAT-CHECKBOX-INPUT' || value === 'MAT-CHECKBOX') {
-        acc.push('MAT-CHECKBOX'); return acc;
+      if (value === 'MAT-MDC-INPUT-ELEMENT' || value === 'MAT-MDC-SELECT') {
+        acc.push('MAT-MDC-FORM-FIELD'); return acc;
+      } else if (value === 'MAT-MDC-RADIO-INPUT' || value === 'MAT-MDC-RADIO-GROUP') {
+        acc.push('MAT-MDC-RADIO-GROUP'); return acc;
+      } else if (value === 'MAT-MDC-CHECKBOX-INPUT' || value === 'MAT-MDC-CHECKBOX') {
+        acc.push('MAT-MDC-CHECKBOX'); return acc;
       } else {
         return acc;
       }
     }, []);
 
+    // Default to MAT-FORM-FIELD if no specific material element class is found
+    if (elementClass.length === 0) {
+      this.parentNodeName = 'MAT-FORM-FIELD';
+      this.depthOfParentNode = 5;
+      this.isInput = true;
+      return;
+    }
+    
     switch (elementClass[0].toUpperCase()) {
-      case 'MAT-CHECKBOX':
+      case 'MAT-MDC-CHECKBOX':
         this.parentNodeName = 'MAT-CHECKBOX';
         this.depthOfParentNode = 3;
         this.isCheckbox = true;
         break;
-      case 'MAT-RADIO-GROUP':
+      case 'MAT-MDC-RADIO-GROUP':
         this.parentNodeName = 'MAT-RADIO-GROUP';
         this.depthOfParentNode = 3;
         this.isRadioButton = true;
         break;
-      case 'MAT-FORM-FIELD':
-      case 'MAT-SELECT':
+      case 'MAT-MDC-FORM-FIELD':
+      case 'MAT-MDC-SELECT':
         this.parentNodeName = 'MAT-FORM-FIELD';
         this.depthOfParentNode = 4;
         this.isInput = true;
@@ -141,7 +148,7 @@ export class NgxMatValidatorDirective implements OnInit, AfterViewInit, OnDestro
 
     if (this.isCheckbox || this.isRadioButton) {
 
-      this.renderer2.addClass(node, 'mat-form-field');
+      this.renderer2.addClass(node, 'mat-mdc-form-field');
       let errorValidationContainer = node.querySelector('.ui-validation-transitionMessages');
 
       if (errorValidationContainer === null) {
@@ -169,11 +176,11 @@ export class NgxMatValidatorDirective implements OnInit, AfterViewInit, OnDestro
 
     if (this.isInput) {
       const matErrorContainer = node.querySelector('.ng-trigger-transitionMessages');
-      this.addMatErrorsToHtml(matErrorContainer, node, errorMsg, 'mat-form-field-invalid');
+      this.addMatErrorsToHtml(matErrorContainer, node, errorMsg, 'mat-mdc-form-field-invalid');
 
     } else if (this.isRadioButton || this.isCheckbox) {
       const matErrorContainer = node.querySelector('.ui-validation-transitionMessages');
-      const errorClass = this.isCheckbox ? 'mat-checkbox-invalid' : 'mat-radio-invalid';
+      const errorClass = this.isCheckbox ? 'mat-mdc-checkbox-invalid' : 'mat-mdc-radio-invalid';
 
       this.addMatErrorsToHtml(matErrorContainer, node, errorMsg, errorClass);
     }
@@ -197,7 +204,7 @@ export class NgxMatValidatorDirective implements OnInit, AfterViewInit, OnDestro
           const errorElem = document.createElement('mat-error');
           const textNode = document.createTextNode(errorMsg);
           errorElem.appendChild(textNode);
-          errorElem.className = 'mat-error';
+          errorElem.className = 'mat-mdc-form-field-error mat-mdc-form-field-bottom-align';
 
           const refDivNode = errorElement.querySelector('div');
           this.renderer2.insertBefore(errorElement, errorElem, refDivNode);

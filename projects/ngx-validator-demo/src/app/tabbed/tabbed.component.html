@@ -1,143 +1,160 @@
 <mat-toolbar color="primary" style="display: flex;">
-    <span>Tabbed Content Validation</span>
+  <span>Tabbed Content Validation</span>
 
-    <!-- This fills the remaining space of the current row -->
-    <span class="example-fill-remaining-space"></span>
+  <!-- This fills the remaining space of the current row -->
+  <span class="example-fill-remaining-space"></span>
 
-    <button mat-raised-button color="" (click)="validate()"> Validate</button>
+  <button mat-raised-button color="" (click)="validate()"> Validate</button>
 </mat-toolbar>
 
 <ngx-component-validator [model]="tabdoc" [policy]="ORDER_POLICY_NAME" [policyFnRef]="ORDER_VALIDATION_FN">
 </ngx-component-validator>
-<mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4" color="primary">
-    <mat-tab>
-        <mat-card ngxMatGroupValidityCheck="personal-section" (groupValidationStatusChange)="handleGroupValidationStatusChange($event)">
+<mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4" color="primary" animationDuration="0ms">
+  <mat-tab>
+    <mat-card ngxMatGroupValidityCheck="personal-section" (groupValidationStatusChange)="handleGroupValidationStatusChange($event)">
+      <ng-template mat-tab-label>
+        <span style="display: flex; align-items: center;">
+          Personal Info
+          @if (flags.showPersonalSectionErrorStatus) {
+            <mat-icon class="example-tab-icon" style="color:red">error_outline</mat-icon>
+          }
+          @if (!flags.showPersonalSectionErrorStatus) {
+            <mat-icon class="example-tab-icon" style="color:green">check_circle_outline</mat-icon>
+          }
+        </span>
+      </ng-template>
+      <mat-card-content>
+        <mat-grid-list cols="3" rowHeight="85px">
+          <mat-grid-tile>
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="First Name" ngxMatValidate ngxMatRequired [model]="tabdoc"
+                validateProperty="person.firstName" [policy]="ORDER_POLICY_NAME"
+                [(ngModel)]="tabdoc.person.firstName" />
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <mat-form-field appearance="outline">
+                <input matInput placeholder="Last Name" ngxMatValidate ngxMatRequired [model]="tabdoc"
+                  validateProperty="person.lastName" [policy]="ORDER_POLICY_NAME"
+                  [(ngModel)]="tabdoc.person.lastName" />
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                  <input matInput placeholder="Email ID" ngxMatValidate ngxMatRequired [model]="tabdoc"
+                    validateProperty="person.email" [policy]="ORDER_POLICY_NAME"
+                    [(ngModel)]="tabdoc.person.email" />
+                  </mat-form-field>
+                </mat-grid-tile>
+              </mat-grid-list>
+            </mat-card-content>
+          </mat-card>
+        </mat-tab>
+        <mat-tab>
+          <mat-card ngxMatGroupValidityCheck="address-section" (groupValidationStatusChange)="handleGroupValidationStatusChange($event)">
             <ng-template mat-tab-label>
-                Personal Info
-                <mat-icon *ngIf="flags.showPersonalSectionErrorStatus" class="example-tab-icon" style="color:red">error_outline
-                </mat-icon>
-                <mat-icon *ngIf="!flags.showPersonalSectionErrorStatus" class="example-tab-icon" style="color:green">
-                    check_circle_outline</mat-icon>
-            </ng-template>
-            <mat-grid-list cols="3" rowHeight="65px">
-                <mat-grid-tile>
-                    <mat-form-field>
-                        <input matInput placeholder="First Name" ngxMatValidate ngxMatRequired [model]="tabdoc"
-                            validateProperty="person.firstName" [policy]="ORDER_POLICY_NAME"
-                            [(ngModel)]="tabdoc.person.firstName" />
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile>
-                    <mat-form-field>
-                        <input matInput placeholder="Last Name" ngxMatValidate ngxMatRequired [model]="tabdoc"
-                            validateProperty="person.lastName" [policy]="ORDER_POLICY_NAME"
-                            [(ngModel)]="tabdoc.person.lastName" />
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile>
-                    <mat-form-field>
-                        <input matInput placeholder="Email ID" ngxMatValidate ngxMatRequired [model]="tabdoc"
-                            validateProperty="person.email" [policy]="ORDER_POLICY_NAME"
-                            [(ngModel)]="tabdoc.person.email" />
-                    </mat-form-field>
-                </mat-grid-tile>
-            </mat-grid-list>
-        </mat-card>
-    </mat-tab>
-    <mat-tab>
-        <mat-card ngxMatGroupValidityCheck="address-section" (groupValidationStatusChange)="handleGroupValidationStatusChange($event)">
-            <ng-template mat-tab-label>
+              <span style="display: flex; align-items: center;">
                 Address
-                <mat-icon *ngIf="flags.showAddressSectionErrorStatus" class="example-tab-icon" style="color:red">error_outline
-                </mat-icon>
-                <mat-icon *ngIf="!flags.showAddressSectionErrorStatus" class="example-tab-icon" style="color:green">
-                    check_circle_outline</mat-icon>
+                @if (flags.showAddressSectionErrorStatus) {
+                  <mat-icon class="example-tab-icon" style="color:red">error_outline</mat-icon>
+                }
+                @if (!flags.showAddressSectionErrorStatus) {
+                  <mat-icon class="example-tab-icon" style="color:green">check_circle_outline</mat-icon>
+                }
+              </span>
             </ng-template>
-            <mat-grid-list cols="3" rowHeight="65px">
+            <mat-card-content>
+              <mat-grid-list cols="3" rowHeight="110px">
                 <mat-grid-tile>
-                    <mat-form-field>
-                        <input matInput placeholder="Address Line 1" ngxMatValidate ngxMatRequired [model]="tabdoc"
-                            validateProperty="address.line1" [policy]="ORDER_POLICY_NAME"
-                            [(ngModel)]="tabdoc.address.line1" />
+                  <mat-form-field appearance="outline">
+                    <input matInput placeholder="Address Line 1" ngxMatValidate ngxMatRequired [model]="tabdoc"
+                      validateProperty="address.line1" [policy]="ORDER_POLICY_NAME"
+                      [(ngModel)]="tabdoc.address.line1" />
                     </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile>
-                    <mat-form-field>
-                        <input matInput placeholder="Address Line 2" ngxMatValidate ngxMatRequired [model]="tabdoc"
-                            validateProperty="address.line2" [policy]="ORDER_POLICY_NAME"
-                            [(ngModel)]="tabdoc.address.line2" />
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile>
-                    <mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile>
+                    <mat-form-field appearance="outline">
+                      <input matInput placeholder="Address Line 2" ngxMatValidate ngxMatRequired [model]="tabdoc"
+                        validateProperty="address.line2" [policy]="ORDER_POLICY_NAME"
+                        [(ngModel)]="tabdoc.address.line2" />
+                      </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                      <mat-form-field appearance="outline">
                         <input matInput placeholder="City" ngxMatValidate ngxMatRequired [model]="tabdoc"
-                            validateProperty="address.city" [policy]="ORDER_POLICY_NAME"
-                            [(ngModel)]="tabdoc.address.city" />
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile>
-                    <mat-form-field>
-                        <mat-label>State</mat-label>
-                        <mat-select ngxMatValidate ngxMatRequired [model]="tabdoc" validateProperty="address.state"
+                          validateProperty="address.city" [policy]="ORDER_POLICY_NAME"
+                          [(ngModel)]="tabdoc.address.city" />
+                        </mat-form-field>
+                      </mat-grid-tile>
+                      <mat-grid-tile>
+                        <mat-form-field appearance="outline">
+                          <mat-label>State</mat-label>
+                          <mat-select ngxMatValidate ngxMatRequired [model]="tabdoc" validateProperty="address.state"
                             [policy]="ORDER_POLICY_NAME" [(ngModel)]="tabdoc.address.state">
-                            <mat-option *ngFor="let s of states" [value]="s.value">
+                            @for (s of states; track s) {
+                              <mat-option [value]="s.value">
                                 {{s.viewValue}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile>
-                    <mat-form-field>
-                        <input matInput placeholder="Zip Code" ngxMatValidate ngxMatRequired [model]="tabdoc"
+                              </mat-option>
+                            }
+                          </mat-select>
+                        </mat-form-field>
+                      </mat-grid-tile>
+                      <mat-grid-tile>
+                        <mat-form-field appearance="outline">
+                          <input matInput placeholder="Zip Code" ngxMatValidate ngxMatRequired [model]="tabdoc"
                             validateProperty="address.zip" [policy]="ORDER_POLICY_NAME"
                             [(ngModel)]="tabdoc.address.zip" />
-                    </mat-form-field>
-                </mat-grid-tile>
-            </mat-grid-list>
-
-        </mat-card>
-    </mat-tab>
-    <mat-tab>
-        <mat-card ngxMatGroupValidityCheck="payment-section" (groupValidationStatusChange)="handleGroupValidationStatusChange($event)">
-            <ng-template mat-tab-label>
-                Payment Info
-                <mat-icon *ngIf="flags.showPaymentSectionErrorStatus" class="example-tab-icon" style="color:red">error_outline
-                </mat-icon>
-                <mat-icon *ngIf="!flags.showPaymentSectionErrorStatus" class="example-tab-icon" style="color:green">
-                    check_circle_outline</mat-icon>
-            </ng-template>
-            <mat-grid-list cols="2" rowHeight="65px">
-                <mat-grid-tile>
-                    <mat-form-field>
-                        <input matInput placeholder="Card Number" ngxMatValidate ngxMatRequired [model]="tabdoc"
-                            validateProperty="payment.cardno" [policy]="ORDER_POLICY_NAME"
-                            [(ngModel)]="tabdoc.payment.cardno" />
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile>
-                    <mat-form-field>
-                        <input matInput placeholder="Name on Card" ngxMatValidate ngxMatRequired [model]="tabdoc"
-                            validateProperty="payment.name" [policy]="ORDER_POLICY_NAME"
-                            [(ngModel)]="tabdoc.payment.name" />
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile>
-                    <mat-form-field>
-                        <input matInput placeholder="Expiry" ngxMatValidate ngxMatRequired [model]="tabdoc"
-                            validateProperty="payment.expiry" [policy]="ORDER_POLICY_NAME"
-                            [(ngModel)]="tabdoc.payment.expiry" />
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile>
-                    <mat-form-field>
-                        <input matInput placeholder="CVV" ngxMatValidate ngxMatRequired [model]="tabdoc"
-                            validateProperty="payment.cvv" [policy]="ORDER_POLICY_NAME"
-                            [(ngModel)]="tabdoc.payment.cvv" />
-                    </mat-form-field>
-                </mat-grid-tile>
-
-            </mat-grid-list>
-
-        </mat-card>
-    </mat-tab>
-</mat-tab-group>
+                          </mat-form-field>
+                        </mat-grid-tile>
+                      </mat-grid-list>
+                    </mat-card-content>
+                  </mat-card>
+                </mat-tab>
+                <mat-tab>
+                  <mat-card ngxMatGroupValidityCheck="payment-section" (groupValidationStatusChange)="handleGroupValidationStatusChange($event)">
+                    <ng-template mat-tab-label>
+                      <span style="display: flex; align-items: center;">
+                        Payment Info
+                        @if (flags.showPaymentSectionErrorStatus) {
+                          <mat-icon class="example-tab-icon" style="color:red">error_outline</mat-icon>
+                        }
+                        @if (!flags.showPaymentSectionErrorStatus) {
+                          <mat-icon class="example-tab-icon" style="color:green">check_circle_outline</mat-icon>
+                        }
+                      </span>
+                    </ng-template>
+                    <mat-card-content>
+                      <mat-grid-list cols="2" rowHeight="110px">
+                        <mat-grid-tile>
+                          <mat-form-field appearance="outline">
+                            <input matInput placeholder="Card Number" ngxMatValidate ngxMatRequired [model]="tabdoc"
+                              validateProperty="payment.cardno" [policy]="ORDER_POLICY_NAME"
+                              [(ngModel)]="tabdoc.payment.cardno" />
+                            </mat-form-field>
+                          </mat-grid-tile>
+                          <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                              <input matInput placeholder="Name on Card" ngxMatValidate ngxMatRequired [model]="tabdoc"
+                                validateProperty="payment.name" [policy]="ORDER_POLICY_NAME"
+                                [(ngModel)]="tabdoc.payment.name" />
+                              </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                              <mat-form-field appearance="outline">
+                                <input matInput placeholder="Expiry" ngxMatValidate ngxMatRequired [model]="tabdoc"
+                                  validateProperty="payment.expiry" [policy]="ORDER_POLICY_NAME"
+                                  [(ngModel)]="tabdoc.payment.expiry" />
+                                </mat-form-field>
+                              </mat-grid-tile>
+                              <mat-grid-tile>
+                                <mat-form-field appearance="outline">
+                                  <input matInput placeholder="CVV" ngxMatValidate ngxMatRequired [model]="tabdoc"
+                                    validateProperty="payment.cvv" [policy]="ORDER_POLICY_NAME"
+                                    [(ngModel)]="tabdoc.payment.cvv" />
+                                  </mat-form-field>
+                                </mat-grid-tile>
+                              </mat-grid-list>
+                            </mat-card-content>
+                          </mat-card>
+                        </mat-tab>
+                      </mat-tab-group>

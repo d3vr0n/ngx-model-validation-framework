@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
- templateUrl : './section-6.component.html'
+    templateUrl: './section-6.component.html',
+    standalone: false
 })
 export class Section6Component implements OnInit {
   @Input() bigdoc: any;

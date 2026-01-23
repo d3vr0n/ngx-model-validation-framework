@@ -3,9 +3,10 @@ import { NgxValidationRunnerService } from 'ngx-model-validator';
 import { OrderValidationPolicy } from './tabbed.order.validation.policy';
 
 @Component({
-  selector: 'app-tabbed',
-  templateUrl: './tabbed.component.html',
-  styleUrls: ['./tabbed.component.css']
+    selector: 'app-tabbed',
+    templateUrl: './tabbed.component.html',
+    styleUrls: ['./tabbed.component.css', './tabbed.component.styles-fix.css'],
+    standalone: false
 })
 export class TabbedComponent implements OnInit {
 

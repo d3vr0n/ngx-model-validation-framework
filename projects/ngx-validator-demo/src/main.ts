@@ -1,4 +1,4 @@
-import { enableProdMode, ApplicationRef } from '@angular/core';
+import { enableProdMode, ApplicationRef, provideZoneChangeDetection } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
@@ -9,7 +9,7 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
+platformBrowserDynamic().bootstrapModule(AppModule, { applicationProviders: [provideZoneChangeDetection()], })
   .then((moduleRef) => {
     const applicationRef = moduleRef.injector.get(ApplicationRef);
     const componentRef = applicationRef.components[0];

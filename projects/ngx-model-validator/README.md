@@ -5,6 +5,8 @@ A policy based fluid model validation framework for Angular projects.
 [![npm version](https://badge.fury.io/js/ngx-model-validator.svg)](https://www.npmjs.com/ngx-model-validator)
 [![CircleCI](https://circleci.com/gh/d3vr0n/ngx-model-validation-framework/tree/master.svg?style=svg)](https://circleci.com/gh/d3vr0n/ngx-model-validation-framework/tree/master)
 
+> **Updated for Angular 16!** This library now supports Angular 16. Compatible with the MDC-based Material components.
+
 ## Demo
 https://ngx-model-validator.web.app/simple
 
