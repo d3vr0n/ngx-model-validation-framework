@@ -5,7 +5,7 @@ A policy based fluid model validation framework for Angular projects.
 [![npm version](https://badge.fury.io/js/ngx-model-validator.svg)](https://www.npmjs.com/ngx-model-validator)
 [![CircleCI](https://circleci.com/gh/d3vr0n/ngx-model-validation-framework/tree/master.svg?style=svg)](https://circleci.com/gh/d3vr0n/ngx-model-validation-framework/tree/master)
 
-> **Updated for Angular 16!** This library now supports Angular 16. See [ANGULAR16-UPGRADE.md](docs/ANGULAR16-UPGRADE.md) for details.
+> **Updated for Angular 21!** This library now supports Angular 21 with full compatibility for Material v21 and CDK v21.
 
 ## Demo
 https://ngx-model-validator.web.app/simple
@@ -147,6 +147,20 @@ this.valRunnerSvc.validate(this.PERSON_POLICY_NAME, this.person)
 ## Development server
 
 Run `npm run start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## Building
+
+Build the library:
+```bash
+npm run npm-build
+```
+
+Build the demo application:
+```bash
+npm run build-demo
+```
+
+Both builds are fully compatible with Angular 21 and modern ESBuild bundler.
 
 ## Running unit tests
 
